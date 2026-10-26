@@ -1,0 +1,57 @@
+<a class="skip-link" href="#" (click)="skipToContent($event)">Saltar al contenido principal</a>
+
+<ion-app>
+  <!-- En pantallas grandes el menú queda fijo como barra lateral. -->
+  <ion-split-pane contentId="app-outlet" when="lg">
+    <ion-menu contentId="app-outlet" menuId="main-menu" [disabled]="!currentUser()">
+      <ion-content class="sidebar">
+        <div class="sidebar-inner">
+          <div class="brand">
+            <span class="logo" aria-hidden="true"><ion-icon name="layers-outline" /></span>
+            <span class="brand-name">Incidencias360</span>
+          </div>
+
+          @if (currentUser(); as user) {
+            <nav aria-label="Navegación principal">
+              <p class="nav-heading" aria-hidden="true">Menú</p>
+              <ion-list lines="none">
+                <ion-menu-toggle [autoHide]="false">
+                  @for (link of navLinks(); track link.url) {
+                    <ion-item
+                      [routerLink]="link.url"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: link.exact }"
+                      [detail]="false"
+                      class="nav-item"
+                    >
+                      <ion-icon slot="start" [name]="link.icon" aria-hidden="true" />
+                      <ion-label>{{ link.label }}</ion-label>
+                    </ion-item>
+                  }
+                </ion-menu-toggle>
+              </ion-list>
+            </nav>
+
+            <div class="sidebar-footer">
+              <div class="user-card">
+                <span class="avatar" aria-hidden="true">{{ initials() }}</span>
+                <div class="user-info">
+                  <span class="user-name">{{ user.username }}</span>
+                  <span class="role">{{ user.role === 'admin' ? 'Administrador' : 'Usuario estándar' }}</span>
+                </div>
+              </div>
+              <ion-menu-toggle [autoHide]="false">
+                <ion-button expand="block" fill="outline" (click)="logout()">
+                  <ion-icon slot="start" name="log-out-outline" aria-hidden="true" />
+                  Cerrar sesión
+                </ion-button>
+              </ion-menu-toggle>
+            </div>
+          }
+        </div>
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="app-outlet" />
+  </ion-split-pane>
+</ion-app>

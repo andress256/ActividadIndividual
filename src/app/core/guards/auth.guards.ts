@@ -14,6 +14,21 @@ export const authGuard: CanActivateFn = (_route, state) => {
   });
 };
 
+/** Página de inicio de cada rol: el administrador entra al cuadro de mando. */
+export function homeUrl(auth: AuthService): string {
+  if (!auth.isAuthenticated()) return '/login';
+  return auth.hasRole('admin') ? '/dashboard' : '/incidencias';
+}
+
+/** Redirección de la ruta raíz y de las rutas desconocidas. */
+export const homeRedirect = () => homeUrl(inject(AuthService));
+
+/** Evita volver a la pantalla de login con la sesión ya iniciada. */
+export const guestGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  return auth.isAuthenticated() ? inject(Router).parseUrl(homeUrl(auth)) : true;
+};
+
 export function roleGuard(requiredRole: UserRole): CanActivateFn {
   return () => {
     const auth = inject(AuthService);

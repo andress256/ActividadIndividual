@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="app-header">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button aria-label="Abrir menú de navegación" />
@@ -8,61 +8,47 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <main tabindex="-1">
-    <h1>Cuadro de mando</h1>
+  <main tabindex="-1" class="page">
+    <header class="page-header">
+      <div>
+        <h1>Cuadro de mando</h1>
+        <p class="subtitle">Resumen de las incidencias y de la actividad reciente.</p>
+      </div>
+      @if (!loading() && !error()) {
+        <div class="actions">
+          <app-export-buttons [rows]="filtered()" [filter]="filter()" />
+        </div>
+      }
+    </header>
 
     @if (loading()) {
-      <p role="status" class="loading">
-        <ion-spinner name="crescent" aria-hidden="true" /> Cargando datos de la API y del feed en tiempo real…
-      </p>
+      <div role="status" class="surface-card state">
+        <ion-spinner name="crescent" aria-hidden="true" />
+        <p>Cargando datos de la base de datos y del feed en tiempo real…</p>
+      </div>
     } @else if (error()) {
-      <div role="alert" class="error-box">
+      <div role="alert" class="surface-card state error">
+        <ion-icon name="alert-circle-outline" aria-hidden="true" />
         <p>{{ error() }}</p>
-        <ion-button (click)="load()">Reintentar</ion-button>
+        <ion-button (click)="load()">
+          <ion-icon slot="start" name="refresh-outline" aria-hidden="true" />
+          Reintentar
+        </ion-button>
       </div>
     } @else {
-      <section aria-labelledby="filters-title" class="filters">
-        <h2 id="filters-title">Filtros</h2>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="4">
-              <ion-input label="Buscar" labelPlacement="stacked" fill="outline" [(ngModel)]="search" [debounce]="200" />
-            </ion-col>
-            <ion-col size="6" size-md="2">
-              <ion-select label="Estado" labelPlacement="stacked" fill="outline" interface="popover" [(ngModel)]="status">
-                <ion-select-option value="all">Todos</ion-select-option>
-                @for (s of statuses; track s) {
-                  <ion-select-option [value]="s">{{ statusLabels[s] }}</ion-select-option>
-                }
-              </ion-select>
-            </ion-col>
-            <ion-col size="6" size-md="2">
-              <ion-select label="Prioridad" labelPlacement="stacked" fill="outline" interface="popover" [(ngModel)]="priority">
-                <ion-select-option value="all">Todas</ion-select-option>
-                @for (p of priorities; track p) {
-                  <ion-select-option [value]="p">{{ priorityLabels[p] }}</ion-select-option>
-                }
-              </ion-select>
-            </ion-col>
-            <ion-col size="6" size-md="2">
-              <ion-input type="date" label="Desde" labelPlacement="stacked" fill="outline" [(ngModel)]="from" />
-            </ion-col>
-            <ion-col size="6" size-md="2">
-              <ion-input type="date" label="Hasta" labelPlacement="stacked" fill="outline" [(ngModel)]="to" />
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <ion-button fill="outline" size="small" (click)="clearFilters()">Limpiar filtros</ion-button>
-        <p class="sr-only" aria-live="polite">{{ filtered().length }} incidencias con los filtros actuales.</p>
-      </section>
-
-      <section aria-labelledby="kpi-title">
-        <h2 id="kpi-title">Resumen</h2>
+      <section aria-labelledby="kpi-title" class="block">
+        <h2 id="kpi-title" class="sr-only">Resumen</h2>
         <div class="kpis">
-          <app-stat-card label="Total filtradas" [value]="filtered().length" hint="Según los filtros actuales" />
+          <app-stat-card
+            label="Total"
+            icon="layers-outline"
+            [value]="filtered().length"
+            hint="Según los filtros actuales"
+          />
           @for (s of statuses; track s; let i = $index) {
             <app-stat-card
               [label]="statusLabels[s]"
+              [icon]="statusIcons[i]"
               [value]="statusCounts()[i]"
               [hint]="percent(statusCounts()[i])"
               [accent]="statusColors[i]"
@@ -74,8 +60,43 @@
         </div>
       </section>
 
-      <section aria-labelledby="charts-title">
-        <h2 id="charts-title">Gráficos</h2>
+      <section aria-labelledby="filters-title" class="surface-card block">
+        <div class="filters-head">
+          <h2 id="filters-title" class="card-title">
+            <ion-icon name="search-outline" aria-hidden="true" /> Filtros
+          </h2>
+          <ion-button fill="clear" size="small" (click)="clearFilters()">Limpiar filtros</ion-button>
+        </div>
+        <div class="filters">
+          <ion-input
+            class="search"
+            label="Buscar"
+            labelPlacement="stacked"
+            fill="outline"
+            placeholder="Título, código o departamento"
+            [(ngModel)]="search"
+            [debounce]="200"
+          />
+          <ion-select label="Estado" labelPlacement="stacked" fill="outline" interface="popover" [(ngModel)]="status">
+            <ion-select-option value="all">Todos</ion-select-option>
+            @for (s of statuses; track s) {
+              <ion-select-option [value]="s">{{ statusLabels[s] }}</ion-select-option>
+            }
+          </ion-select>
+          <ion-select label="Prioridad" labelPlacement="stacked" fill="outline" interface="popover" [(ngModel)]="priority">
+            <ion-select-option value="all">Todas</ion-select-option>
+            @for (p of priorities; track p) {
+              <ion-select-option [value]="p">{{ priorityLabels[p] }}</ion-select-option>
+            }
+          </ion-select>
+          <ion-input type="date" label="Desde" labelPlacement="stacked" fill="outline" [(ngModel)]="from" />
+          <ion-input type="date" label="Hasta" labelPlacement="stacked" fill="outline" [(ngModel)]="to" />
+        </div>
+        <p class="sr-only" aria-live="polite">{{ filtered().length }} incidencias con los filtros actuales.</p>
+      </section>
+
+      <section aria-labelledby="charts-title" class="block">
+        <h2 id="charts-title" class="sr-only">Gráficos</h2>
         <div class="charts">
           <app-chart-widget
             title="Incidencias por estado"
@@ -103,9 +124,10 @@
       </section>
 
       <div class="bottom">
-        <section aria-labelledby="table-title" class="table-section">
-          <h2 id="table-title">Incidencias filtradas</h2>
-          <app-export-buttons [rows]="filtered()" [filter]="filter()" />
+        <section aria-labelledby="table-title" class="surface-card">
+          <h2 id="table-title" class="card-title">
+            <ion-icon name="list-outline" aria-hidden="true" /> Incidencias filtradas
+          </h2>
           <app-incident-table
             caption="Incidencias que cumplen los filtros"
             [incidents]="filtered()"
@@ -114,19 +136,30 @@
           />
         </section>
 
-        <section aria-labelledby="activity-title" class="activity">
-          <h2 id="activity-title">Actividad en tiempo real</h2>
-          <p class="provider">Fuente NoSQL: {{ provider }}</p>
-          <ul aria-live="polite">
+        <section aria-labelledby="activity-title" class="surface-card activity">
+          <h2 id="activity-title" class="card-title">
+            <ion-icon name="pulse-outline" aria-hidden="true" /> Actividad en tiempo real
+          </h2>
+          <p class="provider">
+            <span class="live-dot" aria-hidden="true"></span>
+            {{ provider }}
+          </p>
+          <ol aria-live="polite">
             @for (item of activity(); track item.id) {
               <li>
-                <strong>{{ item.message }}</strong>
-                <span>{{ item.user }} · {{ item.at | date: 'dd/MM HH:mm' }}</span>
+                <span class="dot type-{{ item.type }}" aria-hidden="true"></span>
+                <div>
+                  <p class="message">{{ item.message }}</p>
+                  <p class="meta">
+                    <ion-icon name="time-outline" aria-hidden="true" />
+                    {{ item.user }} · {{ item.at | date: 'dd/MM HH:mm' }}
+                  </p>
+                </div>
               </li>
             } @empty {
-              <li>Sin actividad reciente.</li>
+              <li class="empty">Sin actividad reciente.</li>
             }
-          </ul>
+          </ol>
         </section>
       </div>
     }

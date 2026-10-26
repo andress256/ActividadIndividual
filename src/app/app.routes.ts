@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-import { authGuard, roleGuard } from './core/guards/auth.guards';
+import { authGuard, guestGuard, homeRedirect, roleGuard } from './core/guards/auth.guards';
 
 export const routes: Routes = [
   {
     path: 'login',
     title: 'Iniciar sesión · Incidencias360',
+    canActivate: [guestGuard],
     loadComponent: () =>
       import('./pages/auth/login/login.page').then((m) => m.LoginPage),
   },
@@ -41,6 +42,7 @@ export const routes: Routes = [
     title: 'Ayuda · Incidencias360',
     loadComponent: () => import('./pages/help/help.page').then((m) => m.HelpPage),
   },
-  { path: '', pathMatch: 'full', redirectTo: 'incidencias' },
-  { path: '**', redirectTo: 'incidencias' },
+  // La página de inicio depende del rol (admin → cuadro de mando).
+  { path: '', pathMatch: 'full', redirectTo: homeRedirect },
+  { path: '**', redirectTo: homeRedirect },
 ];

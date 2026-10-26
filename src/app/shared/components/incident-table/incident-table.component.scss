@@ -2,10 +2,18 @@
   display: block;
 }
 
+ion-searchbar {
+  --background: var(--app-hover);
+  --border-radius: 10px;
+  --box-shadow: none;
+  padding: 0 0 0.75rem;
+}
+
 .table-scroll {
   overflow-x: auto;
   border: 1px solid var(--app-border);
-  border-radius: 8px;
+  border-radius: 12px;
+  background: var(--app-surface);
 }
 
 table {
@@ -17,15 +25,37 @@ table {
 caption {
   text-align: left;
   font-weight: 600;
-  padding: 0.75rem;
+  padding: 0.85rem 1rem;
+}
+
+thead th {
+  background: var(--app-hover);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--app-muted-text);
 }
 
 th,
 td {
-  padding: 0.6rem 0.75rem;
+  padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--app-border);
+  border-top: 1px solid var(--app-border);
   white-space: nowrap;
+}
+
+tbody tr {
+  transition: background-color 0.12s ease;
+}
+
+tbody tr:hover {
+  background: var(--app-hover);
+}
+
+td:first-child {
+  font-variant-numeric: tabular-nums;
+  color: var(--app-muted-text);
+  font-size: 0.88rem;
 }
 
 td:nth-child(2) {
@@ -46,39 +76,33 @@ td:nth-child(2) {
 
 .sort-button {
   font-weight: 600;
+  text-transform: inherit;
+  letter-spacing: inherit;
 }
 
 .link-button {
+  color: var(--ion-text-color);
+  font-weight: 600;
+}
+
+.link-button:hover {
   color: var(--ion-color-primary);
   text-decoration: underline;
 }
 
-.badge {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border: 1px solid currentColor;
-}
-
-.status-open { color: var(--app-status-open); }
-.status-in-progress { color: var(--app-status-progress); }
-.status-closed { color: var(--app-status-closed); }
-.priority-high { color: var(--app-priority-high); }
-.priority-medium { color: var(--app-priority-medium); }
-.priority-low { color: var(--app-priority-low); }
-
 .empty {
   text-align: center;
-  padding: 2rem;
+  padding: 2.5rem;
+  color: var(--app-muted-text);
 }
 
 .pagination {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  color: var(--app-muted-text);
+  font-size: 0.9rem;
 }
