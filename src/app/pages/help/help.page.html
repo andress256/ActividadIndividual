@@ -104,10 +104,14 @@
         <div slot="content" class="ion-padding">
           <p>Todos los datos son <strong>sintéticos</strong>: no hay información personal real.</p>
           <ul>
-            <li>Incidencias y departamentos: API REST relacional (SQL) simulada.</li>
+            <li>Incidencias y departamentos (SQL): {{ sqlProvider }}.</li>
             <li>Actividad en tiempo real (NoSQL): {{ provider }}.</li>
           </ul>
-          <p>Los cambios que haces se guardan en este navegador.</p>
+          @if (sqlProvider.startsWith('Supabase')) {
+            <p>Las incidencias se guardan en la base de datos y las ven todos los usuarios.</p>
+          } @else {
+            <p>Los cambios que haces se guardan en este navegador.</p>
+          }
         </div>
       </ion-accordion>
 

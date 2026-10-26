@@ -8,6 +8,7 @@ import {
   IncidentView,
   NewIncident,
 } from '../../models/incident.model';
+import { IncidentRepository, newIncidentId } from './incident-repository';
 
 const OVERLAY_KEY = 'incidencias360_sql_overlay';
 
@@ -18,15 +19,15 @@ interface Overlay {
 }
 
 /**
- * Cliente de la API REST relacional (SQL).
+ * API REST simulada (alternativa cuando no hay Supabase configurado).
  *
- * Las lecturas se hacen por HTTP contra `environment.apiBaseUrl`, que en la
- * demo apunta a un mock JSON con las tablas `incidents` y `departments`. Las
- * escrituras se simulan guardando los cambios en `localStorage`, de modo que la
- * app funciona desplegada sin servidor propio.
+ * Las lecturas se hacen por HTTP contra `environment.apiBaseUrl`, que apunta a
+ * un mock JSON con las tablas `incidents` y `departments`. Las escrituras se
+ * simulan guardando los cambios en `localStorage`.
  */
-@Injectable({ providedIn: 'root' })
-export class IncidentApiService {
+@Injectable()
+export class IncidentApiService extends IncidentRepository {
+  readonly provider = 'API REST simulada (JSON + localStorage)';
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.apiBaseUrl;
   /** Latencia simulada (ms) para que se aprecien los estados de carga. */
@@ -83,7 +84,7 @@ export class IncidentApiService {
   create(data: NewIncident, createdBy: string): Observable<Incident> {
     const incident: Incident = {
       ...data,
-      id: `INC-${Date.now().toString(36).toUpperCase()}`,
+      id: newIncidentId(),
       status: 'open',
       createdAt: new Date().toISOString(),
       createdBy,

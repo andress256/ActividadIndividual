@@ -4,15 +4,23 @@
   "author": "AndrÃ©s FernÃ¡ndez Benito",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/set-env.mjs",
     "start": "ng serve",
+    "prebuild": "node scripts/set-env.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "pretest": "node scripts/set-env.mjs",
     "test": "ng test --watch=false",
+    "prelint": "node scripts/set-env.mjs",
     "lint": "ng lint",
     "test:watch": "ng test",
+    "predocs": "node scripts/set-env.mjs",
     "docs": "compodoc -p tsconfig.doc.json -d documentation --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode",
     "docs:serve": "compodoc -p tsconfig.doc.json -s --language es-ES",
-    "build:prod": "ng build --configuration production && compodoc -p tsconfig.doc.json -d www/docs --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode"
+    "prebuild:prod": "node scripts/set-env.mjs",
+    "build:prod": "ng build --configuration production && compodoc -p tsconfig.doc.json -d www/docs --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode",
+    "db:seed": "node scripts/generate-seed.mjs",
+    "db:check": "node scripts/check-supabase.mjs"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +36,7 @@
     "@capacitor/keyboard": "8.0.6",
     "@capacitor/status-bar": "8.0.4",
     "@ionic/angular": "^9.0.0",
+    "@supabase/supabase-js": "^2.118.0",
     "chart.js": "^4.6.1",
     "firebase": "^12.19.0",
     "ionicons": "^8.1.0",

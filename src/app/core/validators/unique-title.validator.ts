@@ -1,6 +1,6 @@
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable, catchError, first, map, of, switchMap, timer } from 'rxjs';
-import { IncidentApiService } from '../services/incident-api.service';
+import { IncidentRepository } from '../services/incident-repository';
 
 /**
  * Validador asíncrono: consulta la API para comprobar que no existe ya una
@@ -14,7 +14,7 @@ import { IncidentApiService } from '../services/incident-api.service';
  * no compararla consigo misma.
  */
 export function uniqueTitleValidator(
-  api: IncidentApiService,
+  api: IncidentRepository,
   excludeId: () => string | undefined = () => undefined,
 ): AsyncValidatorFn {
   return (control: AbstractControl<string>): Observable<ValidationErrors | null> => {

@@ -10,7 +10,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
-import { IncidentApiService } from '../../core/services/incident-api.service';
+import { IncidentRepository } from '../../core/services/incident-repository';
 import { EMPTY_FILTER, applyIncidentFilter } from '../../models/incident-filter.model';
 import { IncidentView } from '../../models/incident.model';
 import { ExportButtonsComponent } from '../../shared/components/export-buttons/export-buttons.component';
@@ -69,7 +69,7 @@ import { IncidentTableComponent } from '../../shared/components/incident-table/i
   `,
 })
 export class IncidentsPage {
-  private readonly api = inject(IncidentApiService);
+  private readonly api = inject(IncidentRepository);
   private readonly router = inject(Router);
 
   readonly incidents = signal<IncidentView[]>([]);
