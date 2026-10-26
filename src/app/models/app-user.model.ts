@@ -6,3 +6,8 @@ export interface AppUser {
   displayName: string;
   role: UserRole;
 }
+
+export interface AuthUser {
+  username: string;
+  role: UserRole;
+}
