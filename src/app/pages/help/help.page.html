@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button aria-label="Abrir menú de navegación" />
+    </ion-buttons>
+    <ion-title>Ayuda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <main tabindex="-1" class="page-narrow">
+    <h1>Manual de usuario</h1>
+    <p>
+      Incidencias360 sirve para registrar, consultar y analizar las incidencias internas de la
+      empresa (averías, problemas informáticos, peticiones…). Pulsa cada apartado para desplegarlo.
+    </p>
+
+    <ion-accordion-group [multiple]="true" value="acceso">
+      <ion-accordion value="acceso">
+        <ion-item slot="header"><ion-label><h2>Acceso y roles</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <p>Entra desde la pantalla <a routerLink="/login">Iniciar sesión</a> con tu usuario y contraseña. Hay dos perfiles:</p>
+          <ul>
+            <li><strong>Usuario estándar:</strong> consulta, crea y edita incidencias y descarga informes.</li>
+            <li><strong>Administrador:</strong> además accede al <em>Cuadro de mando</em> con métricas y gráficos.</li>
+          </ul>
+          <p>
+            Si intentas abrir una página sin permiso, la aplicación te devuelve a una página permitida.
+            La sesión caduca a la hora; usa <strong>Cerrar sesión</strong> en el menú al terminar.
+          </p>
+          @if (user(); as u) {
+            <p>Ahora mismo has iniciado sesión como <strong>{{ u.username }}</strong> ({{ u.role === 'admin' ? 'Administrador' : 'Usuario estándar' }}).</p>
+          }
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="menu">
+        <ion-item slot="header"><ion-label><h2>Navegación</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <p>
+            Abre el menú lateral con el botón <strong>☰</strong> de la barra superior. En pantallas
+            pequeñas también puedes deslizar desde el borde izquierdo.
+          </p>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="incidencias">
+        <ion-item slot="header"><ion-label><h2>Gestionar incidencias</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <ol>
+            <li>En <a routerLink="/incidencias">Incidencias</a> verás la tabla con todas las incidencias.</li>
+            <li>Escribe en el buscador para filtrar por título, código o departamento.</li>
+            <li>Pulsa el nombre de una columna para ordenar; púlsalo otra vez para invertir el orden.</li>
+            <li>Usa <em>Anterior</em> y <em>Siguiente</em> para cambiar de página.</li>
+            <li>Pulsa el título de una incidencia para editarla y cambiar su estado.</li>
+            <li>Con <a routerLink="/incidencias/nueva">Nueva incidencia</a> registras una nueva.</li>
+          </ol>
+          <p>
+            Al escribir el título, la aplicación comprueba en el servidor que no exista otra
+            incidencia con el mismo nombre y te avisa antes de guardar.
+          </p>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="dashboard">
+        <ion-item slot="header"><ion-label><h2>Cuadro de mando (administrador)</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <ul>
+            <li>Los filtros de búsqueda, estado, prioridad y fechas actualizan al momento las cifras, los gráficos y la tabla.</li>
+            <li>Pulsa una tarjeta de estado (Abierta, En curso, Cerrada) o un sector del gráfico para filtrar por ese valor.</li>
+            <li>El bloque <em>Actividad en tiempo real</em> muestra los últimos cambios sin recargar la página.</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="informes">
+        <ion-item slot="header"><ion-label><h2>Informes PDF y CSV</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <p>
+            Los botones <strong>Exportar PDF</strong> y <strong>Exportar CSV</strong> descargan las
+            incidencias que se ven en ese momento (con la búsqueda o los filtros aplicados).
+          </p>
+          <ul>
+            <li>El PDF incluye la fecha, los filtros, un resumen por estado y la tabla paginada.</li>
+            <li>El CSV usa punto y coma y se abre directamente en Excel con las tildes correctas.</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="accesibilidad">
+        <ion-item slot="header"><ion-label><h2>Accesibilidad y teclado</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <ul>
+            <li>Pulsa <kbd>Tab</kbd> al cargar la página para ver el enlace <em>Saltar al contenido principal</em>.</li>
+            <li>Todos los controles se usan con <kbd>Tab</kbd>, <kbd>Mayús</kbd>+<kbd>Tab</kbd>, <kbd>Enter</kbd> y <kbd>Espacio</kbd>.</li>
+            <li>Puedes ampliar el texto con el zoom del navegador (<kbd>Ctrl</kbd>+<kbd>+</kbd>) sin perder contenido.</li>
+            <li>La aplicación respeta el modo oscuro y la opción de reducir animaciones del sistema.</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="datos">
+        <ion-item slot="header"><ion-label><h2>Datos y privacidad</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <p>Todos los datos son <strong>sintéticos</strong>: no hay información personal real.</p>
+          <ul>
+            <li>Incidencias y departamentos: API REST relacional (SQL) simulada.</li>
+            <li>Actividad en tiempo real (NoSQL): {{ provider }}.</li>
+          </ul>
+          <p>Los cambios que haces se guardan en este navegador.</p>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="problemas">
+        <ion-item slot="header"><ion-label><h2>Problemas frecuentes</h2></ion-label></ion-item>
+        <div slot="content" class="ion-padding">
+          <dl>
+            <dt>No puedo entrar al Cuadro de mando</dt>
+            <dd>Solo está disponible para el perfil Administrador.</dd>
+            <dt>Me devuelve a la pantalla de inicio de sesión</dt>
+            <dd>La sesión ha caducado; vuelve a iniciar sesión.</dd>
+            <dt>No se guarda la incidencia</dt>
+            <dd>Revisa los mensajes bajo cada campo: el título debe ser único y tener al menos 5 caracteres.</dd>
+          </dl>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </main>
+</ion-content>

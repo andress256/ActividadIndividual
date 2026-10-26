@@ -36,6 +36,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/incidents/incident-form.page').then((m) => m.IncidentFormPage),
   },
+  {
+    path: 'ayuda',
+    title: 'Ayuda · Incidencias360',
+    loadComponent: () => import('./pages/help/help.page').then((m) => m.HelpPage),
+  },
   { path: '', pathMatch: 'full', redirectTo: 'incidencias' },
   { path: '**', redirectTo: 'incidencias' },
 ];

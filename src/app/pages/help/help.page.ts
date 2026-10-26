@@ -1,0 +1,41 @@
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonAccordion,
+  IonAccordionGroup,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonMenuButton,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { ActivityFeedService } from '../../core/services/activity-feed.service';
+import { AuthService } from '../../core/services/auth.service';
+
+/** Manual de usuario integrado en la aplicación. */
+@Component({
+  selector: 'app-help',
+  standalone: true,
+  imports: [
+    RouterLink,
+    IonAccordion,
+    IonAccordionGroup,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonMenuButton,
+    IonTitle,
+    IonToolbar,
+  ],
+  templateUrl: './help.page.html',
+  styleUrl: './help.page.scss',
+})
+export class HelpPage {
+  readonly user = inject(AuthService).user;
+  readonly provider = inject(ActivityFeedService).provider;
+}
