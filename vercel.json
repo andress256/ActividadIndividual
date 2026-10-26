@@ -4,8 +4,11 @@
   "installCommand": "npm ci",
   "buildCommand": "npm run build:prod",
   "outputDirectory": "www",
+  "redirects": [
+    { "source": "/docs", "destination": "/docs/index.html", "permanent": false },
+    { "source": "/docs/", "destination": "/docs/index.html", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/docs", "destination": "/docs/index.html" },
     { "source": "/((?!assets/|docs/).*)", "destination": "/index.html" }
   ],
   "headers": [

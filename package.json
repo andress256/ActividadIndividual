@@ -1,7 +1,7 @@
 {
   "name": "incidencias360",
   "version": "0.0.1",
-  "author": "Andrés Fernández Benito",
+  "author": "AndrÃ©s FernÃ¡ndez Benito",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,9 +10,9 @@
     "test": "ng test --watch=false",
     "lint": "ng lint",
     "test:watch": "ng test",
-    "docs": "compodoc -p tsconfig.app.json -d documentation --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode",
-    "docs:serve": "compodoc -p tsconfig.app.json -s --language es-ES",
-    "build:prod": "ng build --configuration production && compodoc -p tsconfig.app.json -d www/docs --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode"
+    "docs": "compodoc -p tsconfig.doc.json -d documentation --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode",
+    "docs:serve": "compodoc -p tsconfig.doc.json -s --language es-ES",
+    "build:prod": "ng build --configuration production && compodoc -p tsconfig.doc.json -d www/docs --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode"
   },
   "private": true,
   "dependencies": {
@@ -51,5 +51,5 @@
     "typescript-eslint": "^8.61.0",
     "vitest": "~5.0.5"
   },
-  "description": "Sistema de gestión de incidencias multiplataforma (Ionic + Angular)"
+  "description": "Sistema de gestiÃ³n de incidencias multiplataforma (Ionic + Angular)"
 }
