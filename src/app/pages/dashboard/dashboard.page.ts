@@ -32,6 +32,7 @@ import {
   STATUS_LABELS,
 } from '../../models/incident.model';
 import { ChartWidgetComponent } from '../../shared/components/chart-widget/chart-widget.component';
+import { ExportButtonsComponent } from '../../shared/components/export-buttons/export-buttons.component';
 import { IncidentTableComponent } from '../../shared/components/incident-table/incident-table.component';
 import { StatCardComponent } from '../../shared/components/stat-card/stat-card.component';
 
@@ -46,6 +47,7 @@ const PRIORITIES: IncidentPriority[] = ['high', 'medium', 'low'];
     DatePipe,
     FormsModule,
     ChartWidgetComponent,
+    ExportButtonsComponent,
     IncidentTableComponent,
     StatCardComponent,
     IonButton,
