@@ -1,0 +1,56 @@
+<ion-searchbar
+  [(ngModel)]="search"
+  placeholder="Buscar por título, código o departamento"
+  aria-label="Buscar incidencias"
+  [debounce]="200"
+/>
+
+<p class="sr-only" aria-live="polite">{{ rows().length }} incidencias encontradas.</p>
+
+<div class="table-scroll" role="region" [attr.aria-label]="caption()" tabindex="0">
+  <table>
+    <caption>{{ caption() }}</caption>
+    <thead>
+      <tr>
+        @for (column of columns; track column.key) {
+          <th scope="col" [attr.aria-sort]="ariaSort(column.key)">
+            <button type="button" class="sort-button" (click)="sortBy(column.key)">
+              {{ column.label }}
+              <span aria-hidden="true">
+                {{ sortKey() === column.key ? (sortAsc() ? '▲' : '▼') : '' }}
+              </span>
+            </button>
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of pageRows(); track row.id) {
+        <tr>
+          <td>{{ row.id }}</td>
+          <td>
+            <button type="button" class="link-button" (click)="rowSelected.emit(row)">
+              {{ row.title }}
+            </button>
+          </td>
+          <td>{{ row.departmentName }}</td>
+          <td><span class="badge priority-{{ row.priority }}">{{ priorityLabels[row.priority] }}</span></td>
+          <td><span class="badge status-{{ row.status }}">{{ statusLabels[row.status] }}</span></td>
+          <td>{{ row.createdAt | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="columns.length" class="empty">No hay incidencias que coincidan.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<nav class="pagination" aria-label="Paginación de la tabla">
+  <ion-button fill="clear" [disabled]="page() === 0" (click)="goTo(page() - 1)">Anterior</ion-button>
+  <span>Página {{ page() + 1 }} de {{ pageCount() }}</span>
+  <ion-button fill="clear" [disabled]="page() >= pageCount() - 1" (click)="goTo(page() + 1)">
+    Siguiente
+  </ion-button>
+</nav>

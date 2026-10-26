@@ -1,0 +1,17 @@
+<figure>
+  <figcaption>{{ title() }}</figcaption>
+  <div class="canvas-box">
+    <canvas #canvas role="img" [attr.aria-label]="title() + '. Datos en la tabla siguiente.'"></canvas>
+  </div>
+  <table class="sr-only">
+    <caption>{{ title() }}</caption>
+    <tbody>
+      @for (label of labels(); track label; let i = $index) {
+        <tr>
+          <th scope="row">{{ label }}</th>
+          <td>{{ values()[i] }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</figure>

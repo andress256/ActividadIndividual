@@ -44,11 +44,11 @@ import { AuthService } from './core/services/auth.service';
           <ion-list>
             @if (currentUser(); as user) {
               <ion-menu-toggle>
-                <ion-item routerLink="/dashboard"><ion-label>Inicio</ion-label></ion-item>
-                <ion-item routerLink="/incidencias"><ion-label>Incidencias</ion-label></ion-item>
                 @if (user.role === 'admin') {
-                  <ion-item routerLink="/admin"><ion-label>Administración</ion-label></ion-item>
+                  <ion-item routerLink="/dashboard"><ion-label>Cuadro de mando</ion-label></ion-item>
                 }
+                <ion-item routerLink="/incidencias"><ion-label>Incidencias</ion-label></ion-item>
+                <ion-item routerLink="/incidencias/nueva"><ion-label>Nueva incidencia</ion-label></ion-item>
               </ion-menu-toggle>
               <ion-item>
                 <ion-label>{{ user.username }} ({{ user.role }})</ion-label>

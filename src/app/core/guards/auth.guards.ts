@@ -22,6 +22,6 @@ export function roleGuard(requiredRole: UserRole): CanActivateFn {
     if (!auth.isAuthenticated()) return router.createUrlTree(['/login']);
     if (auth.hasRole(requiredRole)) return true;
 
-    return router.createUrlTree(['/dashboard']);
+    return router.createUrlTree(['/incidencias']);
   };
 }
