@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -55,11 +55,11 @@ import { AuthService } from '../../../core/services/auth.service';
           />
         </ion-item>
 
-        <ion-button expand="block" type="submit" [disabled]="form.invalid || busy">
-          {{ busy ? 'Validando…' : 'Entrar' }}
+        <ion-button expand="block" type="submit" [disabled]="form.invalid || busy()">
+          {{ busy() ? 'Validando…' : 'Entrar' }}
         </ion-button>
 
-        <p aria-live="polite" role="status">{{ message }}</p>
+        <p aria-live="polite" role="status">{{ message() }}</p>
       </form>
     </ion-content>
   `,
@@ -75,37 +75,36 @@ export class LoginPage {
     password: ['', Validators.required],
   });
 
-  busy = false;
-  message = '';
+  readonly busy = signal(false);
+  readonly message = signal('');
 
   async submit(): Promise<void> {
-    this.message = '';
-    if (this.form.invalid || this.busy) {
+    this.message.set('');
+    if (this.form.invalid || this.busy()) {
       this.form.markAllAsTouched();
       return;
     }
 
-    this.busy = true;
+    this.busy.set(true);
     const { username, password } = this.form.getRawValue();
 
     try {
       const valid = await this.auth.login(username, password);
       if (!valid) {
-        this.message = 'Usuario o contraseña incorrectos.';
+        this.message.set('Usuario o contraseña incorrectos.');
         return;
       }
 
+      const home = this.auth.hasRole('admin') ? '/dashboard' : '/incidencias';
       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
       const safeReturnUrl =
-        returnUrl?.startsWith('/') && !returnUrl.startsWith('//')
-          ? returnUrl
-          : '/dashboard';
+        returnUrl?.startsWith('/') && !returnUrl.startsWith('//') ? returnUrl : home;
 
       await this.router.navigateByUrl(safeReturnUrl);
     } catch {
-      this.message = 'No se pudo validar el acceso en este navegador.';
+      this.message.set('No se pudo validar el acceso en este navegador.');
     } finally {
-      this.busy = false;
+      this.busy.set(false);
     }
   }
 }

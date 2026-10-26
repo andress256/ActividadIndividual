@@ -11,6 +11,10 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { ActivityFeedService } from './core/services/activity-feed.service';
+import { FirestoreActivityFeedService } from './core/services/firestore-activity-feed.service';
+import { LocalActivityFeedService } from './core/services/local-activity-feed.service';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +22,12 @@ export const appConfig: ApplicationConfig = {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
     provideHttpClient(withInterceptors([authInterceptor])),
+    // Fuente NoSQL: Firestore si hay configuración, si no la implementación local.
+    {
+      provide: ActivityFeedService,
+      useClass: environment.firebase.projectId
+        ? FirestoreActivityFeedService
+        : LocalActivityFeedService,
+    },
   ],
 };

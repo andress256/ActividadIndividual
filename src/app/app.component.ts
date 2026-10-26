@@ -42,7 +42,7 @@ import { AuthService } from './core/services/auth.service';
         </ion-header>
         <ion-content>
           <ion-list>
-            @if (currentUser; as user) {
+            @if (currentUser(); as user) {
               <ion-menu-toggle>
                 <ion-item routerLink="/dashboard"><ion-label>Inicio</ion-label></ion-item>
                 <ion-item routerLink="/incidencias"><ion-label>Incidencias</ion-label></ion-item>
@@ -70,9 +70,7 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
   private readonly auth = inject(AuthService);
 
-  get currentUser() {
-    return this.auth.getCurrentUser();
-  }
+  readonly currentUser = this.auth.user;
 
   logout(): void {
     this.auth.logout();

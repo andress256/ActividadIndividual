@@ -20,6 +20,18 @@ export const routes: Routes = [
       import('./pages/incidents/incidents.page').then((m) => m.IncidentsPage),
   },
   {
+    path: 'incidencias/nueva',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/incidents/incident-form.page').then((m) => m.IncidentFormPage),
+  },
+  {
+    path: 'incidencias/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/incidents/incident-form.page').then((m) => m.IncidentFormPage),
+  },
+  {
     path: 'admin',
     canActivate: [roleGuard('admin')],
     loadComponent: () =>

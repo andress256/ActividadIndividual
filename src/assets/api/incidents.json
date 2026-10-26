@@ -1,0 +1,302 @@
+[
+  {
+    "id": "INC-001",
+    "title": "Impresora de la planta 2 sin conexión",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "closed",
+    "priority": "high",
+    "departmentId": 1,
+    "createdAt": "2026-05-01T00:01:25.200Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-002",
+    "title": "Fallo de acceso a la VPN",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "closed",
+    "priority": "high",
+    "departmentId": 1,
+    "createdAt": "2026-05-07T23:53:17.253Z",
+    "createdBy": "tecnico1"
+  },
+  {
+    "id": "INC-003",
+    "title": "Aire acondicionado de la sala de reuniones",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 2,
+    "createdAt": "2026-05-14T07:47:32.392Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-004",
+    "title": "Portátil no arranca tras actualización",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 1,
+    "createdAt": "2026-05-21T07:14:21.143Z",
+    "createdBy": "usuario"
+  },
+  {
+    "id": "INC-005",
+    "title": "Fuga de agua en el almacén",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 2,
+    "createdAt": "2026-05-25T00:45:20.654Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-006",
+    "title": "Error al generar nóminas",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "closed",
+    "priority": "high",
+    "departmentId": 3,
+    "createdAt": "2026-05-31T22:28:39.312Z",
+    "createdBy": "usuario"
+  },
+  {
+    "id": "INC-007",
+    "title": "Centralita telefónica con cortes",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "closed",
+    "priority": "high",
+    "departmentId": 1,
+    "createdAt": "2026-06-06T19:36:31.236Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-008",
+    "title": "Lector de códigos de barras averiado",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 5,
+    "createdAt": "2026-06-12T11:34:55.398Z",
+    "createdBy": "usuario"
+  },
+  {
+    "id": "INC-009",
+    "title": "Cuenta de correo bloqueada",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "in-progress",
+    "priority": "high",
+    "departmentId": 1,
+    "createdAt": "2026-06-17T00:03:28.270Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-010",
+    "title": "Puerta de emergencia no cierra",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "closed",
+    "priority": "medium",
+    "departmentId": 2,
+    "createdAt": "2026-06-24T12:17:56.505Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-011",
+    "title": "Monitor con parpadeo",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "closed",
+    "priority": "medium",
+    "departmentId": 1,
+    "createdAt": "2026-06-29T19:02:44.124Z",
+    "createdBy": "tecnico1"
+  },
+  {
+    "id": "INC-012",
+    "title": "Retraso en el envío de pedidos",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "closed",
+    "priority": "medium",
+    "departmentId": 5,
+    "createdAt": "2026-07-05T14:59:31.812Z",
+    "createdBy": "usuario"
+  },
+  {
+    "id": "INC-013",
+    "title": "Wifi lento en la zona de oficinas",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 1,
+    "createdAt": "2026-07-11T18:16:29.782Z",
+    "createdBy": "usuario"
+  },
+  {
+    "id": "INC-014",
+    "title": "Solicitud de alta de nuevo empleado",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 3,
+    "createdAt": "2026-07-19T05:25:47.594Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-015",
+    "title": "Ascensor de carga detenido",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 2,
+    "createdAt": "2026-07-23T10:25:42.838Z",
+    "createdBy": "tecnico1"
+  },
+  {
+    "id": "INC-016",
+    "title": "Licencia de software caducada",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "closed",
+    "priority": "high",
+    "departmentId": 1,
+    "createdAt": "2026-07-30T23:40:15.424Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-017",
+    "title": "Quejas por tiempos de espera",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 4,
+    "createdAt": "2026-08-04T04:24:20.688Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-018",
+    "title": "Carretilla elevadora sin batería",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 5,
+    "createdAt": "2026-08-11T03:38:20.730Z",
+    "createdBy": "usuario"
+  },
+  {
+    "id": "INC-019",
+    "title": "Copia de seguridad fallida",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 1,
+    "createdAt": "2026-08-16T12:17:43.310Z",
+    "createdBy": "tecnico1"
+  },
+  {
+    "id": "INC-020",
+    "title": "Iluminación fundida en el pasillo",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "closed",
+    "priority": "high",
+    "departmentId": 2,
+    "createdAt": "2026-08-22T00:43:24.169Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-021",
+    "title": "Formulario web de contacto caído",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "open",
+    "priority": "medium",
+    "departmentId": 4,
+    "createdAt": "2026-08-28T15:19:10.257Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-022",
+    "title": "Error en el inventario semanal",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "in-progress",
+    "priority": "high",
+    "departmentId": 5,
+    "createdAt": "2026-09-02T14:22:45.575Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-023",
+    "title": "Ratón inalámbrico sin respuesta",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "open",
+    "priority": "high",
+    "departmentId": 1,
+    "createdAt": "2026-09-09T23:57:38.253Z",
+    "createdBy": "tecnico2"
+  },
+  {
+    "id": "INC-024",
+    "title": "Calefacción apagada en recepción",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "in-progress",
+    "priority": "high",
+    "departmentId": 2,
+    "createdAt": "2026-09-15T03:52:12.396Z",
+    "createdBy": "tecnico1"
+  },
+  {
+    "id": "INC-025",
+    "title": "Permisos de carpeta compartida",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "in-progress",
+    "priority": "low",
+    "departmentId": 1,
+    "createdAt": "2026-09-19T17:19:56.100Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-026",
+    "title": "Etiquetas de envío mal impresas",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "in-progress",
+    "priority": "low",
+    "departmentId": 5,
+    "createdAt": "2026-09-26T08:48:25.999Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-027",
+    "title": "Proyector de formación roto",
+    "description": "Varios compañeros han informado del mismo fallo desde ayer por la tarde.",
+    "status": "open",
+    "priority": "high",
+    "departmentId": 2,
+    "createdAt": "2026-10-01T21:38:57.158Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-028",
+    "title": "Duplicados en la base de clientes",
+    "description": "Se necesita una solución antes del cierre de la semana para no bloquear tareas.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 4,
+    "createdAt": "2026-10-07T17:46:34.750Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-029",
+    "title": "Teclado con teclas bloqueadas",
+    "description": "Se detecta el problema al inicio de la jornada y afecta al trabajo del equipo.",
+    "status": "in-progress",
+    "priority": "low",
+    "departmentId": 1,
+    "createdAt": "2026-10-13T03:27:41.605Z",
+    "createdBy": "admin"
+  },
+  {
+    "id": "INC-030",
+    "title": "Revisión del extintor del muelle",
+    "description": "El incidente se repite varias veces al día y requiere revisión técnica.",
+    "status": "closed",
+    "priority": "low",
+    "departmentId": 2,
+    "createdAt": "2026-10-20T06:20:13.157Z",
+    "createdBy": "admin"
+  }
+]

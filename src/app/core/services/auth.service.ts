@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthUser, UserRole } from '../../models/app-user.model';
 import { TokenStorageService } from './token-storage.service';
@@ -35,6 +35,13 @@ export class AuthService {
   private readonly tokenStorage = inject(TokenStorageService);
   private readonly router = inject(Router);
 
+  /** Usuario con sesión iniciada, como signal para que las vistas reaccionen. */
+  readonly user = signal<AuthUser | null>(null);
+
+  constructor() {
+    this.user.set(this.getCurrentUser());
+  }
+
   async login(username: string, password: string): Promise<boolean> {
     const account = ACCOUNTS.find(
       (candidate) => candidate.username === username.trim(),
@@ -59,6 +66,7 @@ export class AuthService {
       }),
     );
     this.tokenStorage.setToken(`${header}.${body}.demo`);
+    this.user.set(payload);
 
     return true;
   }
@@ -99,6 +107,7 @@ export class AuthService {
 
   logout(navigate = true): void {
     this.tokenStorage.clear();
+    this.user.set(null);
     if (navigate) void this.router.navigateByUrl('/login');
   }
 

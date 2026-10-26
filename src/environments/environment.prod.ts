@@ -1,3 +1,10 @@
 export const environment = {
-  production: true
+  production: true,
+  apiBaseUrl: 'assets/api',
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    projectId: '',
+    appId: '',
+  },
 };
