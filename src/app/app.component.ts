@@ -15,7 +15,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
-import { filter } from 'rxjs';
+import { filter, skip } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
 
 /** Selector del contenido principal de la página visible (Ionic mantiene en el DOM las páginas anteriores). */
@@ -101,9 +101,11 @@ export class AppComponent {
   constructor() {
     // Tras cada navegación se lleva el foco al contenido nuevo, para que el
     // lector de pantalla anuncie la página y el teclado empiece desde ahí.
+    // La carga inicial se omite: así el primer Tab llega al enlace "Saltar al contenido".
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
+        skip(1),
         takeUntilDestroyed(inject(DestroyRef)),
       )
       .subscribe(() => setTimeout(() => this.focusMain(), 400));
