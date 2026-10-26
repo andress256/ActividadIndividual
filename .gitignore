@@ -71,3 +71,7 @@ Thumbs.db
 
 # Documentación generada por Compodoc
 /documentation
+
+# Claves de Supabase (ver .env.example y scripts/set-env.mjs)
+.env
+/src/environments/supabase.config.ts

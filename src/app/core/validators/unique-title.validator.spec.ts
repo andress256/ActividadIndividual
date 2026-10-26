@@ -1,10 +1,10 @@
 import { FormControl } from '@angular/forms';
 import { Observable, firstValueFrom, of, throwError } from 'rxjs';
-import { IncidentApiService } from '../services/incident-api.service';
+import { IncidentRepository } from '../services/incident-repository';
 import { uniqueTitleValidator } from './unique-title.validator';
 
 function apiReturning(result: Observable<boolean>) {
-  return { isTitleTaken: vi.fn(() => result) } as unknown as IncidentApiService & {
+  return { isTitleTaken: vi.fn(() => result) } as unknown as IncidentRepository & {
     isTitleTaken: ReturnType<typeof vi.fn>;
   };
 }

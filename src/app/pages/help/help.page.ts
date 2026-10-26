@@ -14,6 +14,7 @@ import {
 } from '@ionic/angular';
 import { ActivityFeedService } from '../../core/services/activity-feed.service';
 import { AuthService } from '../../core/services/auth.service';
+import { IncidentRepository } from '../../core/services/incident-repository';
 
 /** Manual de usuario integrado en la aplicación. */
 @Component({
@@ -38,4 +39,5 @@ import { AuthService } from '../../core/services/auth.service';
 export class HelpPage {
   readonly user = inject(AuthService).user;
   readonly provider = inject(ActivityFeedService).provider;
+  readonly sqlProvider = inject(IncidentRepository).provider;
 }

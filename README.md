@@ -27,7 +27,7 @@ Autor: Andrés Fernández Benito.
 | Data binding | Unidireccional (`[prop]`, `{{ }}`) y bidireccional (`[(ngModel)]`, `[(search)]` con `model()`) |
 | Componentes reutilizables | `app-incident-table`, `app-stat-card`, `app-chart-widget`, `app-export-buttons` con `@Input`/`@Output` |
 | Asincronía y concurrencia | RxJS; `forkJoin` para cargar a la vez la API SQL y el feed NoSQL |
-| Fuente SQL (REST) | `IncidentApiService`: tablas `incidents` y `departments` con JOIN |
+| Fuente SQL (REST) | **Supabase (PostgreSQL)** vía PostgREST: tablas `incidents` y `departments` con clave foránea, JOIN, índice único y RLS |
 | Fuente NoSQL en tiempo real | `ActivityFeedService`: Firestore si está configurado; si no, feed local con RxJS sincronizado entre pestañas |
 | Dashboard | Cuadro de mando del administrador con Chart.js y filtros en tiempo real |
 | Exportación | Informes PDF (jsPDF + autotable) y CSV (UTF-8, compatible con Excel) |
@@ -58,10 +58,12 @@ src/app/
 
 ### Fuentes de datos
 
-- **SQL (API REST):** `IncidentApiService` lee por HTTP `assets/api/incidents.json` y
-  `departments.json` (dos tablas relacionadas por `departmentId`). Las escrituras se simulan en
-  `localStorage`, así que la app funciona en producción sin servidor propio. Para usar una API
-  real basta con cambiar `apiBaseUrl` en `src/environments/`.
+- **SQL (API REST):** `IncidentRepository` es una clase abstracta con dos implementaciones:
+  - `SupabaseIncidentService`: base de datos **PostgreSQL en Supabase**, consultada por su API REST
+    (PostgREST) con `@supabase/supabase-js`. Hace el JOIN `incidents → departments` en el servidor.
+    El esquema está en `supabase/schema.sql` y los datos sintéticos en `supabase/seed.sql`.
+  - `IncidentApiService`: API REST simulada (JSON en `assets/api` y escrituras en `localStorage`).
+    Se usa automáticamente si no hay claves de Supabase, por ejemplo en el CI.
 - **NoSQL en tiempo real:** `ActivityFeedService` es una clase abstracta con dos implementaciones.
   Si `environment.firebase.projectId` tiene valor se usa **Firebase Firestore** (`onSnapshot`);
   si no, `LocalActivityFeedService` mantiene el feed con un `BehaviorSubject` y lo sincroniza
@@ -70,6 +72,11 @@ src/app/
 ### Seguridad
 
 - No hay contraseñas en claro en el código: solo hashes SHA-256 de las contraseñas de prueba.
+- Las claves de Supabase no están en el repositorio: se leen de `.env` (local) o de las variables
+  de entorno de Vercel y `scripts/set-env.mjs` genera `src/environments/supabase.config.ts`
+  (ignorado por Git) antes de cada build.
+- Supabase tiene Row Level Security activado: con la clave pública se puede leer, crear y
+  actualizar incidencias, pero no borrarlas ni modificar los departamentos.
 - El JWT es simulado (sin firma). La protección real de datos requeriría validación en el servidor.
 - La configuración web de Firebase es pública por diseño; no se incluyen claves privadas.
 
@@ -91,6 +98,18 @@ npm start            # http://localhost:4200
 | `npm run lint` | ESLint |
 | `npm run docs` | Genera la documentación en `documentation/` |
 | `npm run docs:serve` | Documentación con servidor local |
+| `npm run db:seed` | Regenera `supabase/seed.sql` a partir de `src/assets/api/*.json` |
+
+### Configurar Supabase (base de datos SQL)
+
+1. Crea un proyecto en [supabase.com](https://supabase.com).
+2. En **SQL Editor**, ejecuta `supabase/schema.sql` y después `supabase/seed.sql`.
+3. En **Project Settings → API** copia la *Project URL* y la clave **anon public**.
+4. En local: copia `.env.example` como `.env` y rellena `SUPABASE_URL` y `SUPABASE_ANON_KEY`.
+5. En Vercel: añade esas dos variables en *Settings → Environment Variables* y vuelve a desplegar.
+
+Al arrancar o compilar se muestra `[set-env] Supabase configurado`. En la app, **Ayuda → Datos
+y privacidad** indica qué fuente SQL está activa.
 
 ### Configurar Firebase (opcional)
 
@@ -110,7 +129,7 @@ Flujo Git Flow:
 - `feature/*`: una rama por funcionalidad, integrada en `develop` con merge `--no-ff`
   (`feature/project-setup`, `feature/auth-routing`, `feature/data-sources-validation`,
   `feature/dashboard-components`, `feature/report-export`, `feature/accessibility-responsive`,
-  `feature/documentation-help`, `feature/ci-deployment`).
+  `feature/documentation-help`, `feature/ci-deployment`, `feature/supabase`).
 
 ## Integración continua y despliegue
 

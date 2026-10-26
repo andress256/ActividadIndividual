@@ -22,7 +22,7 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { ActivityFeedService } from '../../core/services/activity-feed.service';
 import { AuthService } from '../../core/services/auth.service';
-import { IncidentApiService } from '../../core/services/incident-api.service';
+import { IncidentRepository } from '../../core/services/incident-repository';
 import { uniqueTitleValidator } from '../../core/validators/unique-title.validator';
 import {
   Department,
@@ -155,7 +155,7 @@ export class IncidentFormPage implements OnInit {
   readonly id = input<string>();
 
   private readonly fb = inject(FormBuilder);
-  private readonly api = inject(IncidentApiService);
+  private readonly api = inject(IncidentRepository);
   private readonly feed = inject(ActivityFeedService);
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
