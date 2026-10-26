@@ -21,7 +21,7 @@ import {
 } from '@ionic/angular';
 import { Subscription, forkJoin, skip, switchMap, take, tap } from 'rxjs';
 import { ActivityFeedService } from '../../core/services/activity-feed.service';
-import { IncidentApiService } from '../../core/services/incident-api.service';
+import { IncidentRepository } from '../../core/services/incident-repository';
 import { Activity } from '../../models/activity.model';
 import { IncidentFilter, applyIncidentFilter } from '../../models/incident-filter.model';
 import {
@@ -69,7 +69,7 @@ const PRIORITIES: IncidentPriority[] = ['high', 'medium', 'low'];
   styleUrl: './dashboard.page.scss',
 })
 export class DashboardPage implements OnInit {
-  private readonly api = inject(IncidentApiService);
+  private readonly api = inject(IncidentRepository);
   private readonly feed = inject(ActivityFeedService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);

@@ -28,7 +28,7 @@ describe('IncidentApiService (API REST SQL)', () => {
     localStorage.clear();
     IncidentApiService.latency = 0;
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideHttpClient(), provideHttpClientTesting(), IncidentApiService],
     });
     api = TestBed.inject(IncidentApiService);
     httpMock = TestBed.inject(HttpTestingController);
