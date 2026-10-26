@@ -9,7 +9,7 @@
   width: 100%;
   height: 100%;
   padding: 1rem;
-  border: 1px solid var(--ion-color-step-200, #ccc);
+  border: 1px solid var(--app-border);
   border-left: 6px solid var(--accent);
   border-radius: 8px;
   background: var(--ion-card-background, var(--ion-background-color));
@@ -23,7 +23,7 @@ button.card {
 }
 
 button.card:hover {
-  background: var(--ion-color-step-50, #f4f4f4);
+  background: var(--app-hover);
 }
 
 .card.active {
@@ -43,5 +43,5 @@ button.card:hover {
 
 .hint {
   font-size: 0.875rem;
-  color: var(--ion-color-step-700, #555);
+  color: var(--app-muted-text);
 }

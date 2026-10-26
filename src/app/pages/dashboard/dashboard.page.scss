@@ -39,13 +39,13 @@ section {
   display: flex;
   flex-direction: column;
   padding: 0.6rem 0;
-  border-bottom: 1px solid var(--ion-color-step-150, #ddd);
+  border-bottom: 1px solid var(--app-border);
 }
 
 .activity li span,
 .provider {
   font-size: 0.875rem;
-  color: var(--ion-color-step-700, #555);
+  color: var(--app-muted-text);
 }
 
 .loading {

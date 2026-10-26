@@ -19,7 +19,10 @@ import { environment } from '../environments/environment';
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
+    // Sin animaciones de transición si el usuario ha pedido reducir el movimiento.
+    provideIonicAngular({
+      animated: !matchMedia('(prefers-reduced-motion: reduce)').matches,
+    }),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
     provideHttpClient(withInterceptors([authInterceptor])),
     // Fuente NoSQL: Firestore si hay configuración, si no la implementación local.
