@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true">
+  <div class="layout">
+    <section class="brand-panel" aria-label="Presentación de Incidencias360">
+      <div class="brand">
+        <span class="logo" aria-hidden="true"><ion-icon name="layers-outline" /></span>
+        <span class="brand-name">Incidencias360</span>
+      </div>
+
+      <div class="pitch">
+        <p class="tagline">Todas las incidencias de tu empresa, bajo control.</p>
+        <p class="lead">Registra, sigue y analiza las incidencias internas desde cualquier dispositivo.</p>
+        <ul class="features">
+          @for (feature of features; track feature.text) {
+            <li>
+              <span class="feature-icon" aria-hidden="true"><ion-icon [name]="feature.icon" /></span>
+              {{ feature.text }}
+            </li>
+          }
+        </ul>
+      </div>
+
+      <p class="brand-footer">Desarrollo de Interfaces · 2.º DAM</p>
+    </section>
+
+    <main class="form-panel" tabindex="-1">
+      <div class="form-card">
+        <h1>Iniciar sesión</h1>
+        <p class="subtitle">Introduce tus credenciales para acceder.</p>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="field">
+            <ion-input
+              fill="outline"
+              label="Usuario"
+              labelPlacement="floating"
+              formControlName="username"
+              autocomplete="username"
+              autocapitalize="off"
+              [attr.aria-describedby]="showError('username') ? 'username-error' : null"
+              required
+            >
+              <ion-icon slot="start" name="person-outline" aria-hidden="true" />
+            </ion-input>
+            <div class="field-help">
+              @if (showError('username')) {
+                <span id="username-error" class="error-text">Escribe tu usuario.</span>
+              }
+            </div>
+          </div>
+
+          <div class="field">
+            <ion-input
+              fill="outline"
+              label="Contraseña"
+              labelPlacement="floating"
+              type="password"
+              formControlName="password"
+              autocomplete="current-password"
+              [attr.aria-describedby]="showError('password') ? 'password-error' : null"
+              required
+            >
+              <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true" />
+              <ion-input-password-toggle slot="end" showLabel="Mostrar contraseña" hideLabel="Ocultar contraseña" />
+            </ion-input>
+            <div class="field-help">
+              @if (showError('password')) {
+                <span id="password-error" class="error-text">Escribe tu contraseña.</span>
+              }
+            </div>
+          </div>
+
+          <div aria-live="assertive">
+            @if (message()) {
+              <p class="alert-box" role="alert">
+                <ion-icon name="alert-circle-outline" aria-hidden="true" />
+                {{ message() }}
+              </p>
+            }
+          </div>
+
+          <ion-button type="submit" expand="block" size="large" class="submit" [disabled]="busy()">
+            @if (busy()) {
+              <ion-spinner name="crescent" aria-hidden="true" />
+              <span>Comprobando…</span>
+            } @else {
+              <ion-icon slot="start" name="log-in-outline" aria-hidden="true" />
+              <span>Entrar</span>
+            }
+          </ion-button>
+        </form>
+
+        <p class="help">¿Primera vez? Consulta el <a routerLink="/ayuda">manual de usuario</a>.</p>
+      </div>
+    </main>
+  </div>
+</ion-content>

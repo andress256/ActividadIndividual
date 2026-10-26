@@ -1,10 +1,32 @@
-ion-accordion-group {
-  margin-top: 1rem;
+ion-accordion-group.surface-card {
+  padding: 0.25rem 0;
+  overflow: hidden;
+}
+
+ion-accordion {
+  --ion-item-background: transparent;
+}
+
+ion-accordion + ion-accordion {
+  border-top: 1px solid var(--app-border);
+}
+
+ion-item[slot='header'] {
+  --padding-start: 1.25rem;
+  --inner-padding-end: 1rem;
+  --border-width: 0;
+  --inner-border-width: 0;
 }
 
 ion-item h2 {
-  font-size: 1.05rem;
+  margin: 0.4rem 0;
+  font-size: 1.02rem;
   font-weight: 600;
+}
+
+[slot='content'] {
+  padding: 0 1.25rem 1.25rem;
+  line-height: 1.55;
 }
 
 dt {
@@ -14,12 +36,15 @@ dt {
 
 dd {
   margin-left: 0;
+  color: var(--app-muted-text);
 }
 
 kbd {
-  padding: 0.1rem 0.35rem;
+  padding: 0.1rem 0.4rem;
   border: 1px solid var(--app-border);
-  border-radius: 4px;
+  border-bottom-width: 2px;
+  border-radius: 6px;
   font-family: inherit;
   font-size: 0.9em;
+  background: var(--app-hover);
 }

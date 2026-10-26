@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+import { IonIcon } from '@ionic/angular';
 
 /**
  * Widget estadístico reutilizable: muestra una cifra con su etiqueta.
@@ -10,7 +11,7 @@ import { Component, input, output } from '@angular/core';
 @Component({
   selector: 'app-stat-card',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, IonIcon],
   templateUrl: './stat-card.component.html',
   styleUrl: './stat-card.component.scss',
 })
@@ -21,6 +22,8 @@ export class StatCardComponent {
   readonly hint = input('');
   /** Variable CSS del color de acento. */
   readonly accent = input('var(--ion-color-primary)');
+  /** Nombre del icono de Ionicons (opcional). */
+  readonly icon = input('');
   readonly selectable = input(false);
   /** Marca la tarjeta como filtro activo. */
   readonly active = input(false);
