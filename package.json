@@ -19,7 +19,8 @@
     "docs:serve": "compodoc -p tsconfig.doc.json -s --language es-ES",
     "prebuild:prod": "node scripts/set-env.mjs",
     "build:prod": "ng build --configuration production && compodoc -p tsconfig.doc.json -d www/docs --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode",
-    "db:seed": "node scripts/generate-seed.mjs"
+    "db:seed": "node scripts/generate-seed.mjs",
+    "db:check": "node scripts/check-supabase.mjs"
   },
   "private": true,
   "dependencies": {
