@@ -1,2 +1,25 @@
-// For information on how to create your own theme, please refer to:
+// Tema de Incidencias360. Documentación de temas de Ionic:
 // https://ionicframework.com/docs/theming/
+
+// Colores semánticos con contraste AA (≥ 4.5:1) sobre el fondo de cada modo.
+:root {
+  --app-status-open: #b3261e;
+  --app-status-progress: #8a5300;
+  --app-status-closed: #1b6e33;
+  --app-priority-high: #b3261e;
+  --app-priority-medium: #8a5300;
+  --app-priority-low: #1d5fa8;
+  --app-focus-ring: #1d5fa8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --app-status-open: #ff8a80;
+    --app-status-progress: #ffcc66;
+    --app-status-closed: #7ddc96;
+    --app-priority-high: #ff8a80;
+    --app-priority-medium: #ffcc66;
+    --app-priority-low: #8ab8ff;
+    --app-focus-ring: #8ab8ff;
+  }
+}
