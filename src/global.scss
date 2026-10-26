@@ -35,3 +35,19 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ---- Incidencias360 ---- */
+.page-narrow {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.field-help {
+  min-height: 1.25rem;
+  padding: 0.25rem 1rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-error:empty {
+  display: none;
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Sistemas"
+  },
+  {
+    "id": 2,
+    "name": "Mantenimiento"
+  },
+  {
+    "id": 3,
+    "name": "Recursos Humanos"
+  },
+  {
+    "id": 4,
+    "name": "Atención al cliente"
+  },
+  {
+    "id": 5,
+    "name": "Logística"
+  }
+]
