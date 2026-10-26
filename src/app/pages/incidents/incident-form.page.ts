@@ -65,7 +65,7 @@ import {
     </ion-header>
 
     <ion-content class="ion-padding">
-      <main id="main-content" class="page-narrow">
+      <main tabindex="-1" class="page-narrow">
         <h1>{{ id() ? 'Editar ' + id() : 'Registrar una incidencia' }}</h1>
 
         @if (loading()) {

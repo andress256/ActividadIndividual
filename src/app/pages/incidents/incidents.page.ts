@@ -42,7 +42,7 @@ import { IncidentTableComponent } from '../../shared/components/incident-table/i
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <main id="main-content" tabindex="-1" class="page-wide">
+      <main tabindex="-1" class="page-wide">
         <div class="page-heading">
           <h1>Listado de incidencias</h1>
           <ion-button routerLink="/incidencias/nueva">Nueva incidencia</ion-button>

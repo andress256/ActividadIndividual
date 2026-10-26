@@ -33,6 +33,9 @@ import { AuthService } from '../../../core/services/auth.service';
     </ion-header>
 
     <ion-content class="ion-padding">
+      <main tabindex="-1" class="page-narrow">
+      <h1>Incidencias360</h1>
+      <p>Accede con tu usuario para gestionar las incidencias internas.</p>
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
         <ion-item>
           <ion-input
@@ -61,6 +64,7 @@ import { AuthService } from '../../../core/services/auth.service';
 
         <p aria-live="polite" role="status">{{ message() }}</p>
       </form>
+      </main>
     </ion-content>
   `,
 })
