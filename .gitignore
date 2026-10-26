@@ -75,3 +75,6 @@ Thumbs.db
 # Claves de Supabase (ver .env.example y scripts/set-env.mjs)
 .env
 /src/environments/supabase.config.ts
+
+# Configuración local de Claude Code (no se sube al repositorio)
+.claude/
