@@ -1,15 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   IonButton,
   IonContent,
-  IonHeader,
+  IonIcon,
   IonInput,
-  IonItem,
-  IonTitle,
-  IonToolbar,
+  IonInputPasswordToggle,
+  IonSpinner,
 } from '@ionic/angular';
+import { homeUrl } from '../../../core/guards/auth.guards';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -17,56 +17,16 @@ import { AuthService } from '../../../core/services/auth.service';
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    RouterLink,
     IonButton,
     IonContent,
-    IonHeader,
+    IonIcon,
     IonInput,
-    IonItem,
-    IonTitle,
-    IonToolbar,
+    IonInputPasswordToggle,
+    IonSpinner,
   ],
-  template: `
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Iniciar sesión</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content class="ion-padding">
-      <main tabindex="-1" class="page-narrow">
-      <h1>Incidencias360</h1>
-      <p>Accede con tu usuario para gestionar las incidencias internas.</p>
-      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <ion-item>
-          <ion-input
-            label="Usuario"
-            labelPlacement="stacked"
-            formControlName="username"
-            autocomplete="username"
-            required
-          />
-        </ion-item>
-
-        <ion-item>
-          <ion-input
-            label="Contraseña"
-            labelPlacement="stacked"
-            type="password"
-            formControlName="password"
-            autocomplete="current-password"
-            required
-          />
-        </ion-item>
-
-        <ion-button expand="block" type="submit" [disabled]="form.invalid || busy()">
-          {{ busy() ? 'Validando…' : 'Entrar' }}
-        </ion-button>
-
-        <p aria-live="polite" role="status">{{ message() }}</p>
-      </form>
-      </main>
-    </ion-content>
-  `,
+  templateUrl: './login.page.html',
+  styleUrl: './login.page.scss',
 })
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
@@ -79,8 +39,20 @@ export class LoginPage {
     password: ['', Validators.required],
   });
 
+  readonly features = [
+    { icon: 'bar-chart-outline', text: 'Cuadro de mando con métricas y gráficos' },
+    { icon: 'pulse-outline', text: 'Actividad en tiempo real' },
+    { icon: 'document-text-outline', text: 'Informes en PDF y CSV' },
+    { icon: 'shield-checkmark-outline', text: 'Acceso por roles' },
+  ];
+
   readonly busy = signal(false);
   readonly message = signal('');
+
+  showError(control: 'username' | 'password'): boolean {
+    const c = this.form.controls[control];
+    return c.invalid && c.touched;
+  }
 
   async submit(): Promise<void> {
     this.message.set('');
@@ -99,12 +71,13 @@ export class LoginPage {
         return;
       }
 
-      const home = this.auth.hasRole('admin') ? '/dashboard' : '/incidencias';
+      // Se respeta la página que el usuario intentaba abrir; si no, su página de inicio.
       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
       const safeReturnUrl =
-        returnUrl?.startsWith('/') && !returnUrl.startsWith('//') ? returnUrl : home;
+        returnUrl?.startsWith('/') && !returnUrl.startsWith('//') ? returnUrl : homeUrl(this.auth);
 
       await this.router.navigateByUrl(safeReturnUrl);
+      this.form.reset();
     } catch {
       this.message.set('No se pudo validar el acceso en este navegador.');
     } finally {

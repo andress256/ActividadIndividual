@@ -1,21 +1,34 @@
-<ion-header>
+<!-- Sin sesión no hay barra lateral: se deja la barra con el botón de iniciar sesión. -->
+<ion-header [class.app-header]="!!user()">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button aria-label="Abrir menú de navegación" />
     </ion-buttons>
     <ion-title>Ayuda</ion-title>
+    @if (!user()) {
+      <ion-buttons slot="end">
+        <ion-button routerLink="/login">
+          <ion-icon slot="start" name="log-in-outline" aria-hidden="true" />
+          Iniciar sesión
+        </ion-button>
+      </ion-buttons>
+    }
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <main tabindex="-1" class="page-narrow">
-    <h1>Manual de usuario</h1>
-    <p>
-      Incidencias360 sirve para registrar, consultar y analizar las incidencias internas de la
-      empresa (averías, problemas informáticos, peticiones…). Pulsa cada apartado para desplegarlo.
-    </p>
+    <header class="page-header">
+      <div>
+        <h1>Manual de usuario</h1>
+        <p class="subtitle">
+          Incidencias360 sirve para registrar, consultar y analizar las incidencias internas de la
+          empresa. Pulsa cada apartado para desplegarlo.
+        </p>
+      </div>
+    </header>
 
-    <ion-accordion-group [multiple]="true" value="acceso">
+    <ion-accordion-group [multiple]="true" value="acceso" class="surface-card">
       <ion-accordion value="acceso">
         <ion-item slot="header"><ion-label><h2>Acceso y roles</h2></ion-label></ion-item>
         <div slot="content" class="ion-padding">

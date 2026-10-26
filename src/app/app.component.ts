@@ -1,25 +1,32 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
   IonButton,
   IonContent,
-  IonHeader,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonMenu,
   IonMenuToggle,
   IonRouterOutlet,
-  IonTitle,
-  IonToolbar,
+  IonSplitPane,
 } from '@ionic/angular';
 import { filter, skip } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
 
 /** Selector del contenido principal de la página visible (Ionic mantiene en el DOM las páginas anteriores). */
 const VISIBLE_MAIN = '.ion-page:not(.ion-page-hidden) main';
+
+interface NavLink {
+  url: string;
+  label: string;
+  icon: string;
+  exact: boolean;
+  adminOnly?: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -30,73 +37,39 @@ const VISIBLE_MAIN = '.ion-page:not(.ion-page-hidden) main';
     IonApp,
     IonButton,
     IonContent,
-    IonHeader,
+    IonIcon,
     IonItem,
     IonLabel,
     IonList,
     IonMenu,
     IonMenuToggle,
     IonRouterOutlet,
-    IonTitle,
-    IonToolbar,
+    IonSplitPane,
   ],
-  template: `
-    <a class="skip-link" href="#" (click)="skipToContent($event)">Saltar al contenido principal</a>
-
-    <ion-app>
-      <ion-menu contentId="app-outlet" menuId="main-menu">
-        <ion-header>
-          <ion-toolbar><ion-title>Incidencias360</ion-title></ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <nav aria-label="Navegación principal">
-            <ion-list>
-              @if (currentUser(); as user) {
-                <ion-menu-toggle [autoHide]="false">
-                  @if (user.role === 'admin') {
-                    <ion-item routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-                      <ion-label>Cuadro de mando</ion-label>
-                    </ion-item>
-                  }
-                  <ion-item routerLink="/incidencias" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-                    <ion-label>Incidencias</ion-label>
-                  </ion-item>
-                  <ion-item routerLink="/incidencias/nueva" routerLinkActive="active-link">
-                    <ion-label>Nueva incidencia</ion-label>
-                  </ion-item>
-                  <ion-item routerLink="/ayuda" routerLinkActive="active-link">
-                    <ion-label>Ayuda</ion-label>
-                  </ion-item>
-                </ion-menu-toggle>
-                <ion-item lines="none">
-                  <ion-label>
-                    <p>Sesión iniciada como</p>
-                    <h2>{{ user.username }} ({{ user.role === 'admin' ? 'Administrador' : 'Usuario estándar' }})</h2>
-                  </ion-label>
-                </ion-item>
-                <ion-menu-toggle [autoHide]="false">
-                  <ion-button expand="block" fill="outline" class="ion-margin" (click)="logout()">Cerrar sesión</ion-button>
-                </ion-menu-toggle>
-              } @else {
-                <ion-menu-toggle [autoHide]="false">
-                  <ion-item routerLink="/login"><ion-label>Iniciar sesión</ion-label></ion-item>
-                  <ion-item routerLink="/ayuda"><ion-label>Ayuda</ion-label></ion-item>
-                </ion-menu-toggle>
-              }
-            </ion-list>
-          </nav>
-        </ion-content>
-      </ion-menu>
-
-      <ion-router-outlet id="app-outlet" />
-    </ion-app>
-  `,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
 
   readonly currentUser = this.auth.user;
+
+  private readonly links: NavLink[] = [
+    { url: '/dashboard', label: 'Cuadro de mando', icon: 'grid-outline', exact: true, adminOnly: true },
+    { url: '/incidencias', label: 'Incidencias', icon: 'list-outline', exact: true },
+    { url: '/incidencias/nueva', label: 'Nueva incidencia', icon: 'add-circle-outline', exact: true },
+    { url: '/ayuda', label: 'Ayuda', icon: 'help-circle-outline', exact: true },
+  ];
+
+  /** Enlaces visibles según el rol del usuario. */
+  readonly navLinks = computed(() => {
+    const isAdmin = this.currentUser()?.role === 'admin';
+    return this.links.filter((link) => !link.adminOnly || isAdmin);
+  });
+
+  /** Iniciales para el avatar. */
+  readonly initials = computed(() => this.currentUser()?.username.slice(0, 2).toUpperCase() ?? '');
 
   constructor() {
     // Tras cada navegación se lleva el foco al contenido nuevo, para que el

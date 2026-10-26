@@ -1,11 +1,8 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
+ * Estilos globales de Incidencias360. Los colores están en src/theme/variables.scss.
+ * Documentación de estilos globales de Ionic:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
@@ -25,26 +22,178 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+/* Modo oscuro según la preferencia del sistema */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
-/* ---- Incidencias360 ---- */
-.page-narrow {
-  max-width: 720px;
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+  font-size: 100%; /* respeta el tamaño de letra elegido por el usuario */
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--ion-color-primary);
+}
+
+/* Barra superior: blanca, con línea inferior en vez de sombra. */
+ion-toolbar {
+  --border-width: 0 0 1px 0;
+  --border-color: var(--app-border);
+}
+
+.header-md {
+  box-shadow: none;
+}
+
+ion-title {
+  font-weight: 600;
+}
+
+ion-back-button {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/*
+ * En escritorio el menú es una barra lateral fija y cada página ya tiene su
+ * propio título (h1), así que la barra superior sobra.
+ */
+@media (min-width: 992px) {
+  ion-header.app-header {
+    display: none;
+  }
+
+  ion-header .desktop-hidden {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Maquetación de páginas
+   ========================================================================== */
+
+.page {
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0.5rem 0 2rem;
+}
+
+.page-narrow {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0.5rem 0 2rem;
+}
+
+/* Cabecera de página: título, subtítulo y acciones. */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.page-header .subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--app-muted-text);
+}
+
+.page-header .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.page-header .actions > ion-button {
+  margin: 0;
+}
+
+/* Tarjeta base reutilizada por todas las vistas. */
+.surface-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+  padding: 1.25rem;
+}
+
+.surface-card > h2:first-child,
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.card-title ion-icon {
+  color: var(--ion-color-primary);
+  font-size: 1.2rem;
+}
+
+/* Estados de carga, error y vacío. */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--app-muted-text);
+}
+
+.state ion-icon {
+  font-size: 2.5rem;
+}
+
+.state.error ion-icon {
+  color: var(--ion-color-danger);
+}
+
+/* Botones: esquinas redondeadas y sin mayúsculas forzadas. */
+ion-button {
+  --border-radius: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/*
+ * Campos con borde: esquinas a juego con los botones. La clase se repite para
+ * superar en especificidad al estilo interno de Ionic (`.input-fill-outline.sc-…`).
+ */
+ion-input.input-fill-outline.input-fill-outline,
+ion-textarea.textarea-fill-outline.textarea-fill-outline,
+ion-select.select-fill-outline.select-fill-outline {
+  --border-radius: 10px;
+  --background: var(--app-surface);
+}
+
+/* Formularios */
+.field {
+  margin-bottom: 0.25rem;
 }
 
 .field-help {
-  min-height: 1.25rem;
-  padding: 0.25rem 1rem 0.5rem;
+  min-height: 1.4rem;
+  padding: 0.3rem 0.25rem 0.6rem;
   font-size: 0.875rem;
 }
 
@@ -52,18 +201,71 @@
   display: none;
 }
 
-.page-wide {
-  max-width: 1280px;
-  margin: 0 auto;
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1rem;
 }
 
-.page-heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+.form-grid > * {
+  min-width: 0;
 }
+
+@media (min-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-grid .full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Mensaje de error destacado. */
+.alert-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--ion-color-danger);
+  color: var(--ion-color-danger);
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+  font-weight: 500;
+}
+
+.alert-box ion-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+}
+
+/* Etiquetas de estado y prioridad (texto + color, nunca solo color). */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.badge::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-open { color: var(--app-status-open); }
+.status-in-progress { color: var(--app-status-progress); }
+.status-closed { color: var(--app-status-closed); }
+.priority-high { color: var(--app-priority-high); }
+.priority-medium { color: var(--app-priority-medium); }
+.priority-low { color: var(--app-priority-low); }
 
 /* Oculto visualmente pero disponible para lectores de pantalla. */
 .sr-only {
@@ -78,10 +280,9 @@
   border: 0;
 }
 
-/* ---- Accesibilidad ---- */
-html {
-  font-size: 100%; /* respeta el tamaño de letra elegido por el usuario */
-}
+/* ==========================================================================
+   Accesibilidad
+   ========================================================================== */
 
 /* Enlace "Saltar al contenido": oculto hasta que recibe el foco con el teclado. */
 .skip-link {
@@ -90,7 +291,7 @@ html {
   left: 1rem;
   z-index: 10000;
   padding: 0.75rem 1rem;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 10px 10px;
   background: var(--ion-color-primary);
   color: var(--ion-color-primary-contrast);
   font-weight: 600;
@@ -115,11 +316,6 @@ ion-button.ion-focused {
 /* El <main> recibe foco por programa al navegar; no necesita anillo. */
 main:focus {
   outline: none;
-}
-
-ion-item.active-link {
-  --color: var(--ion-color-primary);
-  font-weight: 600;
 }
 
 @media (prefers-reduced-motion: reduce) {

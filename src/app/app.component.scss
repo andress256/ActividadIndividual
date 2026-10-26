@@ -1,0 +1,125 @@
+ion-split-pane {
+  --side-width: 264px;
+  --side-max-width: 264px;
+  --border: 1px solid var(--app-border);
+}
+
+.sidebar {
+  --background: var(--app-sidebar);
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.25rem 0.9rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.25rem 0.5rem 1.5rem;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 11px;
+  background: var(--app-brand-gradient);
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.brand-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.nav-heading {
+  margin: 0 0 0.4rem;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--app-muted-text);
+}
+
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+.nav-item {
+  --background: transparent;
+  --background-hover: var(--app-hover);
+  --background-hover-opacity: 1;
+  --border-radius: 10px;
+  --min-height: 44px;
+  --padding-start: 0.75rem;
+  --color: var(--ion-text-color);
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+
+.nav-item ion-icon {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  color: var(--app-muted-text);
+}
+
+.nav-item.active {
+  --background: var(--app-primary-soft);
+  --color: var(--ion-color-primary);
+  font-weight: 600;
+}
+
+.nav-item.active ion-icon {
+  color: var(--ion-color-primary);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 12px;
+  background: var(--app-hover);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--app-brand-gradient);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.role {
+  font-size: 0.82rem;
+  color: var(--app-muted-text);
+}

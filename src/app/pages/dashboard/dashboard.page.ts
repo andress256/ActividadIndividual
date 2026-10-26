@@ -6,13 +6,11 @@ import { Router } from '@angular/router';
 import {
   IonButton,
   IonButtons,
-  IonCol,
   IonContent,
-  IonGrid,
   IonHeader,
+  IonIcon,
   IonInput,
   IonMenuButton,
-  IonRow,
   IonSelect,
   IonSelectOption,
   IonSpinner,
@@ -52,13 +50,11 @@ const PRIORITIES: IncidentPriority[] = ['high', 'medium', 'low'];
     StatCardComponent,
     IonButton,
     IonButtons,
-    IonCol,
     IonContent,
-    IonGrid,
     IonHeader,
+    IonIcon,
     IonInput,
     IonMenuButton,
-    IonRow,
     IonSelect,
     IonSelectOption,
     IonSpinner,
@@ -135,7 +131,8 @@ export class DashboardPage implements OnInit {
 
   readonly statusChartLabels = STATUSES.map((s) => STATUS_LABELS[s]);
   readonly priorityChartLabels = PRIORITIES.map((p) => PRIORITY_LABELS[p]);
-  readonly statusColors = ['var(--app-status-open)', 'var(--app-status-progress)', 'var(--app-status-closed)'];
+  readonly statusIcons = ['alert-circle-outline', 'time-outline', 'checkmark-circle-outline'];
+  readonly statusColors =['var(--app-status-open)', 'var(--app-status-progress)', 'var(--app-status-closed)'];
   readonly priorityColors = ['var(--app-priority-high)', 'var(--app-priority-medium)', 'var(--app-priority-low)'];
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 import { Component, inject, input, signal } from '@angular/core';
-import { IonButton } from '@ionic/angular';
+import { IonButton, IonIcon } from '@ionic/angular';
 import { ReportExportService } from '../../../core/services/report-export.service';
 import { IncidentFilter } from '../../../models/incident-filter.model';
 import { IncidentView } from '../../../models/incident.model';
@@ -8,22 +8,25 @@ import { IncidentView } from '../../../models/incident.model';
 @Component({
   selector: 'app-export-buttons',
   standalone: true,
-  imports: [IonButton],
+  imports: [IonButton, IonIcon],
   template: `
-    <div class="export" role="group" aria-label="Exportar informe">
-      <ion-button size="small" fill="outline" [disabled]="!rows().length || busy()" (click)="pdf()">
-        {{ busy() ? 'Generando PDF…' : 'Exportar PDF' }}
+    <div class="export" role="group" [attr.aria-label]="'Exportar informe de ' + rows().length + ' registros'">
+      <ion-button fill="outline" [disabled]="!rows().length || busy()" (click)="pdf()">
+        <ion-icon slot="start" name="document-text-outline" aria-hidden="true" />
+        {{ busy() ? 'Generando…' : 'PDF' }}
       </ion-button>
-      <ion-button size="small" fill="outline" [disabled]="!rows().length" (click)="csv()">
-        Exportar CSV
+      <ion-button fill="outline" [disabled]="!rows().length" (click)="csv()">
+        <ion-icon slot="start" name="download-outline" aria-hidden="true" />
+        CSV
       </ion-button>
-      <span class="count">{{ rows().length }} registros</span>
     </div>
     <p role="status" class="status">{{ message() }}</p>
   `,
   styles: `
+    :host { display: flex; flex-direction: column; align-items: flex-end; }
     .export { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
-    .count { font-size: 0.875rem; }
+    .export ion-button { margin: 0; }
+    .status { margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--app-muted-text); }
     .status:empty { display: none; }
   `,
 })

@@ -5,6 +5,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonMenuButton,
   IonSpinner,
   IonTitle,
@@ -27,13 +28,14 @@ import { IncidentTableComponent } from '../../shared/components/incident-table/i
     IonButtons,
     IonContent,
     IonHeader,
+    IonIcon,
     IonMenuButton,
     IonSpinner,
     IonTitle,
     IonToolbar,
   ],
   template: `
-    <ion-header>
+    <ion-header class="app-header">
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button aria-label="Abrir menú de navegación" />
@@ -42,28 +44,47 @@ import { IncidentTableComponent } from '../../shared/components/incident-table/i
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <main tabindex="-1" class="page-wide">
-        <div class="page-heading">
-          <h1>Listado de incidencias</h1>
-          <ion-button routerLink="/incidencias/nueva">Nueva incidencia</ion-button>
-        </div>
-
-        @if (loading()) {
-          <p role="status"><ion-spinner name="crescent" aria-hidden="true" /> Cargando incidencias…</p>
-        } @else if (error()) {
-          <div role="alert">
-            <p>{{ error() }}</p>
-            <ion-button fill="outline" (click)="load()">Reintentar</ion-button>
+      <main tabindex="-1" class="page">
+        <header class="page-header">
+          <div>
+            <h1>Incidencias</h1>
+            <p class="subtitle">Consulta, busca y edita las incidencias registradas.</p>
           </div>
-        } @else {
-          <app-export-buttons [rows]="visible()" [filter]="{ search: search() }" />
-          <app-incident-table
-            caption="Todas las incidencias"
-            [incidents]="incidents()"
-            [(search)]="search"
-            (rowSelected)="open($event)"
-          />
-        }
+          <div class="actions">
+            @if (!loading() && !error()) {
+              <app-export-buttons [rows]="visible()" [filter]="{ search: search() }" />
+            }
+            <ion-button routerLink="/incidencias/nueva">
+              <ion-icon slot="start" name="add-circle-outline" aria-hidden="true" />
+              Nueva incidencia
+            </ion-button>
+          </div>
+        </header>
+
+        <section class="surface-card" aria-label="Listado de incidencias">
+          @if (loading()) {
+            <div role="status" class="state">
+              <ion-spinner name="crescent" aria-hidden="true" />
+              <p>Cargando incidencias…</p>
+            </div>
+          } @else if (error()) {
+            <div role="alert" class="state error">
+              <ion-icon name="alert-circle-outline" aria-hidden="true" />
+              <p>{{ error() }}</p>
+              <ion-button fill="outline" (click)="load()">
+                <ion-icon slot="start" name="refresh-outline" aria-hidden="true" />
+                Reintentar
+              </ion-button>
+            </div>
+          } @else {
+            <app-incident-table
+              caption="Todas las incidencias"
+              [incidents]="incidents()"
+              [(search)]="search"
+              (rowSelected)="open($event)"
+            />
+          }
+        </section>
       </main>
     </ion-content>
   `,
