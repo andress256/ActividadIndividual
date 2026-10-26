@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    name: Lint, tests, build y documentación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tests unitarios
+        run: npm test
+
+      - name: Build de producción + Compodoc
+        run: npm run build:prod
+
+      - name: Publicar artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: www
+          path: www
+          retention-days: 7
