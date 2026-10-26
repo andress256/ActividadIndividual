@@ -105,6 +105,7 @@
       <div class="bottom">
         <section aria-labelledby="table-title" class="table-section">
           <h2 id="table-title">Incidencias filtradas</h2>
+          <app-export-buttons [rows]="filtered()" [filter]="filter()" />
           <app-incident-table
             caption="Incidencias que cumplen los filtros"
             [incidents]="filtered()"

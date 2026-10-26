@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   IonButton,
@@ -11,7 +11,9 @@ import {
   IonToolbar,
 } from '@ionic/angular';
 import { IncidentApiService } from '../../core/services/incident-api.service';
+import { EMPTY_FILTER, applyIncidentFilter } from '../../models/incident-filter.model';
 import { IncidentView } from '../../models/incident.model';
+import { ExportButtonsComponent } from '../../shared/components/export-buttons/export-buttons.component';
 import { IncidentTableComponent } from '../../shared/components/incident-table/incident-table.component';
 
 @Component({
@@ -19,6 +21,7 @@ import { IncidentTableComponent } from '../../shared/components/incident-table/i
   standalone: true,
   imports: [
     RouterLink,
+    ExportButtonsComponent,
     IncidentTableComponent,
     IonButton,
     IonButtons,
@@ -53,6 +56,7 @@ import { IncidentTableComponent } from '../../shared/components/incident-table/i
             <ion-button fill="outline" (click)="load()">Reintentar</ion-button>
           </div>
         } @else {
+          <app-export-buttons [rows]="visible()" [filter]="{ search: search() }" />
           <app-incident-table
             caption="Todas las incidencias"
             [incidents]="incidents()"
@@ -70,6 +74,10 @@ export class IncidentsPage {
 
   readonly incidents = signal<IncidentView[]>([]);
   readonly search = signal('');
+  /** Filas que coinciden con la búsqueda de la tabla (las que se exportan). */
+  readonly visible = computed(() =>
+    applyIncidentFilter(this.incidents(), { ...EMPTY_FILTER, search: this.search() }),
+  );
   readonly loading = signal(true);
   readonly error = signal('');
 
