@@ -82,7 +82,7 @@ src/app/
 
 ## Instalación y ejecución
 
-Requisitos: Node.js 22 o superior y npm.
+Requisitos: Node.js 24.15 o superior (incluye npm 11, necesario para `npm ci` con este `package-lock.json`).
 
 ```bash
 npm ci

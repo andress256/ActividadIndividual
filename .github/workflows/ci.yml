@@ -15,7 +15,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # Node 24 incluye npm 11, la misma versión que generó package-lock.json.
+          node-version: 24
           cache: npm
 
       - name: Instalar dependencias
