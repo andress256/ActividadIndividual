@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+figure {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  height: 100%;
+}
+
+figcaption {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.canvas-box {
+  position: relative;
+  height: 240px;
+}

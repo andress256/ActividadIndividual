@@ -1,15 +1,18 @@
 {
-  "name": "Incidencias360",
+  "name": "incidencias360",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Andrés Fernández Benito",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "test": "ng test --watch=false",
+    "lint": "ng lint",
+    "test:watch": "ng test",
+    "docs": "compodoc -p tsconfig.app.json -d documentation --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode",
+    "docs:serve": "compodoc -p tsconfig.app.json -s --language es-ES",
+    "build:prod": "ng build --configuration production && compodoc -p tsconfig.app.json -d www/docs --name Incidencias360 --language es-ES --hideGenerator --disableSourceCode"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +28,11 @@
     "@capacitor/keyboard": "8.0.6",
     "@capacitor/status-bar": "8.0.4",
     "@ionic/angular": "^9.0.0",
+    "chart.js": "^4.6.1",
+    "firebase": "^12.19.0",
     "ionicons": "^8.1.0",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -35,6 +42,7 @@
     "@angular/compiler-cli": "22.2.3",
     "@angular/language-service": "22.2.3",
     "@capacitor/cli": "8.5.3",
+    "@compodoc/compodoc": "^1.2.1",
     "@ionic/angular-toolkit": "^13.0.0",
     "angular-eslint": "22.6.0",
     "eslint": "^10.10.0",
@@ -43,5 +51,5 @@
     "typescript-eslint": "^8.61.0",
     "vitest": "~5.0.5"
   },
-  "description": "An Ionic project"
+  "description": "Sistema de gestión de incidencias multiplataforma (Ionic + Angular)"
 }

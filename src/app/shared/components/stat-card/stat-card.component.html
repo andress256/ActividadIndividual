@@ -1,0 +1,24 @@
+@if (selectable()) {
+  <button
+    type="button"
+    class="card"
+    [class.active]="active()"
+    [style.--accent]="accent()"
+    [attr.aria-pressed]="active()"
+    (click)="selected.emit()"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </button>
+} @else {
+  <div class="card" [style.--accent]="accent()">
+    <ng-container *ngTemplateOutlet="content" />
+  </div>
+}
+
+<ng-template #content>
+  <span class="value">{{ value() }}</span>
+  <span class="label">{{ label() }}</span>
+  @if (hint()) {
+    <span class="hint">{{ hint() }}</span>
+  }
+</ng-template>
