@@ -36,15 +36,29 @@
         </ion-button>
       </div>
     } @else {
-      <section aria-labelledby="kpi-title" class="block">
-        <h2 id="kpi-title" class="sr-only">Resumen</h2>
+      <!-- Tablero de estado: total, barra proporcional por estado y una casilla por estado. -->
+      <section aria-labelledby="kpi-title" class="surface-card status-board block">
+        <div class="board-head">
+          <h2 id="kpi-title" class="card-title">Estado de las incidencias</h2>
+          <p class="board-total">
+            <span class="total-number">{{ filtered().length }}</span>
+            <span>incidencias con los filtros actuales</span>
+          </p>
+        </div>
+        <div class="status-bar" aria-hidden="true">
+          @for (s of statuses; track s; let i = $index) {
+            @if (statusCounts()[i] > 0) {
+              <span
+                class="segment"
+                [class.dimmed]="status() !== 'all' && status() !== s"
+                [style.flex-grow]="statusCounts()[i]"
+                [style.background]="statusColors[i]"
+              ></span>
+            }
+          }
+        </div>
+        <p class="board-hint">Pulsa un estado para filtrar por él; púlsalo otra vez para quitar el filtro.</p>
         <div class="kpis">
-          <app-stat-card
-            label="Total"
-            icon="layers-outline"
-            [value]="filtered().length"
-            hint="Según los filtros actuales"
-          />
           @for (s of statuses; track s; let i = $index) {
             <app-stat-card
               [label]="statusLabels[s]"
@@ -62,9 +76,7 @@
 
       <section aria-labelledby="filters-title" class="surface-card block">
         <div class="filters-head">
-          <h2 id="filters-title" class="card-title">
-            <ion-icon name="search-outline" aria-hidden="true" /> Filtros
-          </h2>
+          <h2 id="filters-title" class="card-title">Filtros</h2>
           <ion-button fill="clear" size="small" (click)="clearFilters()">Limpiar filtros</ion-button>
         </div>
         <div class="filters">
@@ -125,9 +137,7 @@
 
       <div class="bottom">
         <section aria-labelledby="table-title" class="surface-card">
-          <h2 id="table-title" class="card-title">
-            <ion-icon name="list-outline" aria-hidden="true" /> Incidencias filtradas
-          </h2>
+          <h2 id="table-title" class="card-title">Incidencias filtradas</h2>
           <app-incident-table
             caption="Incidencias que cumplen los filtros"
             [incidents]="filtered()"
@@ -137,9 +147,7 @@
         </section>
 
         <section aria-labelledby="activity-title" class="surface-card activity">
-          <h2 id="activity-title" class="card-title">
-            <ion-icon name="pulse-outline" aria-hidden="true" /> Actividad en tiempo real
-          </h2>
+          <h2 id="activity-title" class="card-title">Actividad en tiempo real</h2>
           <p class="provider">
             <span class="live-dot" aria-hidden="true"></span>
             {{ provider }}
@@ -151,8 +159,8 @@
                 <div>
                   <p class="message">{{ item.message }}</p>
                   <p class="meta">
-                    <ion-icon name="time-outline" aria-hidden="true" />
-                    {{ item.user }} · {{ item.at | date: 'dd/MM HH:mm' }}
+                    <span class="who">{{ item.user }}</span>
+                    <time [attr.datetime]="item.at">{{ item.at | date: 'dd/MM, HH:mm' }}</time>
                   </p>
                 </div>
               </li>

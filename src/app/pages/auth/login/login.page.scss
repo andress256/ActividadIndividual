@@ -4,116 +4,74 @@
   min-height: 100%;
 }
 
-/* Panel de marca (en móvil es una cabecera compacta). */
+/* Panel de marca en azul petróleo (en móvil, cabecera compacta sin el parte). */
 .brand-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.75rem 1.5rem 2.25rem;
-  background: var(--app-brand-gradient);
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 2rem;
+  background: var(--app-petrol);
   color: #ffffff;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Círculos decorativos de fondo. */
-.brand-panel::before,
-.brand-panel::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.07);
-  pointer-events: none;
-}
-
-.brand-panel::before {
-  width: 420px;
-  height: 420px;
-  right: -160px;
-  top: -180px;
-}
-
-.brand-panel::after {
-  width: 300px;
-  height: 300px;
-  left: -120px;
-  bottom: -160px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  position: relative;
+  gap: 0.7rem;
 }
 
 .logo {
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 1.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid var(--app-signal);
+  border-radius: 3px;
+  font-size: 1.25rem;
 }
 
 .brand-name {
-  font-size: 1.35rem;
+  font-family: var(--app-font-display);
+  font-size: 1.6rem;
   font-weight: 700;
-}
-
-.pitch {
-  position: relative;
 }
 
 .tagline {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.25;
+  max-width: 22ch;
+  font-family: var(--app-font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.15;
 }
 
-.lead {
-  margin: 0.75rem 0 0;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.5;
-}
-
-.features,
+.work-order,
 .brand-footer {
   display: none;
 }
 
-/* Panel del formulario. */
+/* Formulario */
 .form-panel {
   flex: 1;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 0 1rem 2rem;
+  padding: 1.75rem 1.25rem 2.5rem;
 }
 
 .form-card {
   width: 100%;
-  max-width: 420px;
-  margin-top: -1.25rem;
-  padding: 1.75rem 1.5rem;
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
-  border-radius: 18px;
-  box-shadow: var(--app-shadow);
-  position: relative;
+  max-width: 400px;
 }
 
 h1 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 2.25rem;
   font-weight: 700;
 }
 
 .subtitle {
-  margin: 0.4rem 0 1.5rem;
+  margin: 0.3rem 0 1.5rem;
   color: var(--app-muted-text);
 }
 
@@ -132,7 +90,8 @@ ion-input ion-icon[slot='start'] {
 
 .submit {
   margin: 0.5rem 0 0;
-  --box-shadow: 0 6px 18px rgba(var(--ion-color-primary-rgb), 0.3);
+  font-family: var(--app-font-display);
+  font-size: 1.25rem;
 }
 
 .submit ion-spinner {
@@ -143,12 +102,11 @@ ion-input ion-icon[slot='start'] {
 
 .help {
   margin: 1.5rem 0 0;
-  text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--app-muted-text);
 }
 
-/* Escritorio: dos columnas a pantalla completa. */
+/* Escritorio: dos columnas y el parte de incidencia como elemento protagonista. */
 @media (min-width: 992px) {
   .layout {
     flex-direction: row;
@@ -156,66 +114,117 @@ ion-input ion-icon[slot='start'] {
   }
 
   .brand-panel {
-    flex: 0 0 46%;
+    flex: 0 0 50%;
     justify-content: space-between;
-    padding: 3rem 3.5rem;
-  }
-
-  .pitch {
-    max-width: 30rem;
+    padding: 3rem 4rem;
   }
 
   .tagline {
-    font-size: 2.4rem;
-  }
-
-  .lead {
-    font-size: 1.1rem;
-  }
-
-  .features {
-    display: grid;
-    gap: 0.9rem;
-    margin: 2rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .features li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-weight: 500;
-  }
-
-  .feature-icon {
-    display: grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.14);
-    font-size: 1.15rem;
+    font-size: 2.6rem;
   }
 
   .brand-footer {
     display: block;
     margin: 0;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.875rem;
-    position: relative;
+    font-size: 0.9rem;
+    color: var(--app-sidebar-text);
   }
 
   .form-panel {
     align-items: center;
     padding: 2rem;
+    background: var(--app-sheet);
   }
 
-  .form-card {
-    margin-top: 0;
-    padding: 2.5rem 2.25rem;
-    border: 0;
-    box-shadow: none;
-    background: transparent;
+  /* Parte de trabajo en papel: resguardo a la izquierda separado por una línea perforada. */
+  .work-order {
+    display: flex;
+    align-self: flex-start;
+    width: min(100%, 30rem);
+    background: #ffffff;
+    color: #1b2428;
+    border-radius: 3px;
+    transform: rotate(-2deg);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .wo-stub {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.1rem 1rem;
+    border-right: 2px dashed #9aa5a8;
+    background: #fff4ec;
+  }
+
+  /* Muescas de la perforación. */
+  .wo-stub::before,
+  .wo-stub::after {
+    content: '';
+    position: absolute;
+    right: -0.6rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: var(--app-petrol);
+  }
+
+  .wo-stub::before {
+    top: -0.55rem;
+  }
+
+  .wo-stub::after {
+    bottom: -0.55rem;
+  }
+
+  .wo-label {
+    font-size: 0.85rem;
+    color: #4f5b60;
+  }
+
+  .wo-code {
+    font-family: var(--app-font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: 0.04em;
+  }
+
+  .wo-body {
+    flex: 1;
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+
+  .wo-title {
+    margin: 0 0 0.9rem;
+    font-family: var(--app-font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  .wo-fields {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid #cfd4d0;
+  }
+
+  .wo-fields dt {
+    font-size: 0.8rem;
+    color: #4f5b60;
+  }
+
+  .wo-fields dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .wo-status {
+    color: #a15c00;
   }
 }

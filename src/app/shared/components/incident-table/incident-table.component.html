@@ -27,7 +27,7 @@
     <tbody>
       @for (row of pageRows(); track row.id) {
         <tr>
-          <td>{{ row.id }}</td>
+          <td><span class="ticket-code">{{ row.id }}</span></td>
           <td>
             <button type="button" class="link-button" (click)="rowSelected.emit(row)">
               {{ row.title }}

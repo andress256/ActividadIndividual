@@ -2,12 +2,77 @@
   margin-bottom: 1.25rem;
 }
 
-.kpis {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+/* ---- Tablero de estado ---- */
+.status-board {
+  padding-bottom: 0;
 }
 
+.board-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.board-head .card-title {
+  margin: 0;
+}
+
+.board-total {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--app-muted-text);
+}
+
+.total-number {
+  font-family: var(--app-font-display);
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ion-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Barra proporcional: cada tramo mide lo que pesa su estado. */
+.status-bar {
+  display: flex;
+  gap: 3px;
+  height: 14px;
+  margin: 1rem 0 0.5rem;
+  background: var(--app-hover);
+}
+
+.segment {
+  flex-basis: 0;
+  min-width: 6px;
+  transition: opacity 0.2s ease;
+}
+
+.segment.dimmed {
+  opacity: 0.25;
+}
+
+.board-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--app-muted-text);
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 -1.5rem;
+  border-top: 1px solid var(--app-rule);
+}
+
+.kpis app-stat-card + app-stat-card {
+  border-left: 1px solid var(--app-rule);
+}
+
+/* ---- Filtros ---- */
 .filters-head {
   display: flex;
   align-items: center;
@@ -47,13 +112,13 @@
   align-items: start;
 }
 
-/* Línea temporal de actividad. */
+/* ---- Actividad en tiempo real (registro de cambios) ---- */
 .provider {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin: -0.5rem 0 1rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--app-muted-text);
 }
 
@@ -62,33 +127,29 @@
   height: 0.55rem;
   border-radius: 50%;
   background: var(--app-status-closed);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--app-status-closed) 25%, transparent);
 }
 
 .activity ol {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 0.35rem;
+  border-left: 2px solid var(--app-rule);
 }
 
 .activity li {
   display: flex;
   gap: 0.75rem;
-  padding: 0.7rem 0;
-  border-top: 1px solid var(--app-border);
-}
-
-.activity li:first-child {
-  border-top: 0;
-  padding-top: 0;
+  padding: 0 0 1rem;
+  margin-left: -0.75rem;
 }
 
 .dot {
   flex-shrink: 0;
-  width: 0.7rem;
-  height: 0.7rem;
-  margin-top: 0.35rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-top: 0.3rem;
   border-radius: 50%;
+  border: 2px solid var(--app-sheet);
   background: var(--ion-color-primary);
 }
 
@@ -102,11 +163,14 @@
 
 .meta {
   display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin: 0.2rem 0 0;
-  font-size: 0.82rem;
+  gap: 0.75rem;
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
   color: var(--app-muted-text);
+}
+
+.who {
+  font-weight: 600;
 }
 
 .empty {
@@ -114,10 +178,6 @@
 }
 
 @media (min-width: 768px) {
-  .kpis {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .filters {
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   }
