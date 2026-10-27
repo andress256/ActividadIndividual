@@ -16,7 +16,8 @@ describe('StatCardComponent', () => {
     const fixture = await create(false);
     const el = fixture.nativeElement as HTMLElement;
     expect(el.querySelector('.value')?.textContent).toBe('7');
-    expect(el.querySelector('.label')?.textContent).toBe('Abiertas');
+    // La etiqueta puede llevar un icono delante: se compara el texto sin espacios extremos.
+    expect(el.querySelector('.label')?.textContent?.trim()).toBe('Abiertas');
     expect(el.querySelector('button')).toBeNull();
   });
 

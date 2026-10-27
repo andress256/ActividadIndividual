@@ -39,13 +39,6 @@ export class LoginPage {
     password: ['', Validators.required],
   });
 
-  readonly features = [
-    { icon: 'bar-chart-outline', text: 'Cuadro de mando con métricas y gráficos' },
-    { icon: 'pulse-outline', text: 'Actividad en tiempo real' },
-    { icon: 'document-text-outline', text: 'Informes en PDF y CSV' },
-    { icon: 'shield-checkmark-outline', text: 'Acceso por roles' },
-  ];
-
   readonly busy = signal(false);
   readonly message = signal('');
 

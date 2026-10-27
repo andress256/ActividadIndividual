@@ -16,13 +16,13 @@
 }
 
 <ng-template #content>
-  <span class="top">
-    <span class="label">{{ label() }}</span>
-    @if (icon()) {
-      <span class="icon" aria-hidden="true"><ion-icon [name]="icon()" /></span>
-    }
-  </span>
   <span class="value">{{ value() }}</span>
+  <span class="label">
+    @if (icon()) {
+      <ion-icon [name]="icon()" aria-hidden="true" />
+    }
+    {{ label() }}
+  </span>
   @if (hint()) {
     <span class="hint">{{ hint() }}</span>
   }

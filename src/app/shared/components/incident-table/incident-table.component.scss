@@ -4,63 +4,67 @@
 
 ion-searchbar {
   --background: var(--app-hover);
-  --border-radius: 10px;
+  --border-radius: var(--app-radius);
   --box-shadow: none;
   padding: 0 0 0.75rem;
 }
 
 .table-scroll {
   overflow-x: auto;
-  border: 1px solid var(--app-border);
-  border-radius: 12px;
-  background: var(--app-surface);
+  border-top: 2px solid var(--app-rule-strong);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
 }
 
 caption {
   text-align: left;
+  padding: 0.6rem 0;
+  font-family: var(--app-font-display);
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 0.85rem 1rem;
+  color: var(--app-muted-text);
 }
 
 thead th {
-  background: var(--app-hover);
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--app-muted-text);
+  border-bottom: 1px solid var(--app-rule-strong);
+  font-family: var(--app-font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
 }
 
 th,
 td {
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 0.75rem;
   text-align: left;
-  border-top: 1px solid var(--app-border);
   white-space: nowrap;
 }
 
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+
 tbody tr {
-  transition: background-color 0.12s ease;
+  border-bottom: 1px solid var(--app-rule);
 }
 
 tbody tr:hover {
   background: var(--app-hover);
 }
 
-td:first-child {
-  font-variant-numeric: tabular-nums;
-  color: var(--app-muted-text);
-  font-size: 0.88rem;
-}
-
 td:nth-child(2) {
   white-space: normal;
   min-width: 14rem;
+}
+
+td:last-child {
+  font-variant-numeric: tabular-nums;
+  color: var(--app-muted-text);
 }
 
 .sort-button,
@@ -74,20 +78,17 @@ td:nth-child(2) {
   text-align: left;
 }
 
-.sort-button {
-  font-weight: 600;
-  text-transform: inherit;
-  letter-spacing: inherit;
-}
-
 .link-button {
   color: var(--ion-text-color);
   font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--app-rule);
+  text-underline-offset: 0.2em;
 }
 
 .link-button:hover {
   color: var(--ion-color-primary);
-  text-decoration: underline;
+  text-decoration-color: currentColor;
 }
 
 .empty {
@@ -104,5 +105,5 @@ td:nth-child(2) {
   flex-wrap: wrap;
   margin-top: 0.75rem;
   color: var(--app-muted-text);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }

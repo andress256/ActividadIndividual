@@ -81,9 +81,11 @@ export class ChartWidgetComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const colors = this.resolvedColors();
-    const text = getComputedStyle(document.documentElement)
-      .getPropertyValue('--ion-text-color')
-      .trim() || '#222';
+    const styles = getComputedStyle(document.documentElement);
+    const text = styles.getPropertyValue('--ion-text-color').trim() || '#222';
+    // Los gráficos usan la misma tipografía que la interfaz.
+    Chart.defaults.font.family = styles.getPropertyValue('--app-font').trim() || 'sans-serif';
+    Chart.defaults.font.size = 13;
     this.chart = new Chart(this.canvas().nativeElement, {
       type: this.type(),
       data: {

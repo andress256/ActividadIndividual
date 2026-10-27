@@ -1,8 +1,8 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Estilos globales de Incidencias360. Los colores están en src/theme/variables.scss.
- * Documentación de estilos globales de Ionic:
+ * Estilos globales de Incidencias360 (tema "parte de taller"). Los colores están
+ * en src/theme/variables.scss. Documentación de estilos globales de Ionic:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
@@ -25,6 +25,15 @@
 /* Modo oscuro según la preferencia del sistema */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
+/* Tipografías incluidas en la app (sin peticiones a servicios externos):
+   Barlow para el texto y Barlow Condensed, de estilo señalética, para títulos y cifras. */
+@import '@fontsource/barlow/latin-400.css';
+@import '@fontsource/barlow/latin-500.css';
+@import '@fontsource/barlow/latin-600.css';
+@import '@fontsource/barlow-condensed/latin-500.css';
+@import '@fontsource/barlow-condensed/latin-600.css';
+@import '@fontsource/barlow-condensed/latin-700.css';
+
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -33,20 +42,29 @@ html {
   font-size: 100%; /* respeta el tamaño de letra elegido por el usuario */
 }
 
+body {
+  font-family: var(--app-font);
+  line-height: 1.5;
+}
+
 h1,
 h2,
 h3 {
-  letter-spacing: -0.01em;
+  font-family: var(--app-font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0;
 }
 
 a {
   color: var(--ion-color-primary);
+  text-underline-offset: 0.15em;
 }
 
-/* Barra superior: blanca, con línea inferior en vez de sombra. */
+/* Barra superior (solo móvil/tablet): blanca con filete inferior. */
 ion-toolbar {
   --border-width: 0 0 1px 0;
-  --border-color: var(--app-border);
+  --border-color: var(--app-rule);
 }
 
 .header-md {
@@ -54,6 +72,8 @@ ion-toolbar {
 }
 
 ion-title {
+  font-family: var(--app-font-display);
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
@@ -81,35 +101,38 @@ ion-back-button {
    ========================================================================== */
 
 .page {
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0.5rem 0 2rem;
+  padding: 0.5rem 0 2.5rem;
 }
 
 .page-narrow {
   max-width: 760px;
   margin: 0 auto;
-  padding: 0.5rem 0 2rem;
+  padding: 0.5rem 0 2.5rem;
 }
 
-/* Cabecera de página: título, subtítulo y acciones. */
+/* Cabecera de página: como el encabezado de un parte, cerrado por un filete grueso. */
 .page-header {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1rem;
-  margin: 0.5rem 0 1.5rem;
+  gap: 1rem 1.5rem;
+  margin: 0.5rem 0 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--app-rule-strong);
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
 .page-header .subtitle {
-  margin: 0.35rem 0 0;
+  margin: 0.25rem 0 0;
+  max-width: 60ch;
   color: var(--app-muted-text);
 }
 
@@ -124,13 +147,12 @@ ion-back-button {
   margin: 0;
 }
 
-/* Tarjeta base reutilizada por todas las vistas. */
+/* Hoja: superficie plana con filete, sin sombra. */
 .surface-card {
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
+  background: var(--app-sheet);
+  border: 1px solid var(--app-rule);
   border-radius: var(--app-radius);
-  box-shadow: var(--app-shadow);
-  padding: 1.25rem;
+  padding: 1.25rem 1.5rem;
 }
 
 .surface-card > h2:first-child,
@@ -139,12 +161,13 @@ ion-back-button {
   align-items: center;
   gap: 0.5rem;
   margin: 0 0 1rem;
-  font-size: 1.05rem;
+  font-family: var(--app-font-display);
+  font-size: 1.4rem;
   font-weight: 600;
 }
 
 .card-title ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--app-muted-text);
   font-size: 1.2rem;
 }
 
@@ -167,23 +190,25 @@ ion-back-button {
   color: var(--ion-color-danger);
 }
 
-/* Botones: esquinas redondeadas y sin mayúsculas forzadas. */
+/* Botones: esquinas casi rectas, sin mayúsculas forzadas. */
 ion-button {
-  --border-radius: 10px;
+  --border-radius: var(--app-radius);
+  --box-shadow: none;
   text-transform: none;
   letter-spacing: 0;
   font-weight: 600;
 }
 
 /*
- * Campos con borde: esquinas a juego con los botones. La clase se repite para
+ * Campos con borde: mismas esquinas que los botones. La clase se repite para
  * superar en especificidad al estilo interno de Ionic (`.input-fill-outline.sc-…`).
  */
 ion-input.input-fill-outline.input-fill-outline,
 ion-textarea.textarea-fill-outline.textarea-fill-outline,
 ion-select.select-fill-outline.select-fill-outline {
-  --border-radius: 10px;
-  --background: var(--app-surface);
+  --border-radius: var(--app-radius);
+  --border-color: var(--app-rule);
+  --background: var(--app-sheet);
 }
 
 /* Formularios */
@@ -227,8 +252,8 @@ ion-select.select-fill-outline.select-fill-outline {
   align-items: flex-start;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--ion-color-danger);
+  border-radius: var(--app-radius);
+  border-left: 4px solid var(--ion-color-danger);
   color: var(--ion-color-danger);
   background: rgba(var(--ion-color-danger-rgb), 0.08);
   font-weight: 500;
@@ -239,25 +264,31 @@ ion-select.select-fill-outline.select-fill-outline {
   font-size: 1.25rem;
 }
 
-/* Etiquetas de estado y prioridad (texto + color, nunca solo color). */
+/*
+ * Etiquetas de estado y prioridad con forma de etiqueta colgante de taller:
+ * el ojal a la izquierda y el texto. El estado se lee siempre en texto, no solo por color.
+ */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.82rem;
+  gap: 0.4rem;
+  padding: 0.1rem 0.55rem 0.1rem 0.45rem;
+  border: 1.5px solid currentColor;
+  border-radius: 2px 6px 6px 2px;
+  font-family: var(--app-font-display);
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.3;
   white-space: nowrap;
-  background: color-mix(in srgb, currentColor 10%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
 }
 
 .badge::before {
   content: '';
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: 50%;
-  background: currentColor;
+  border: 1.5px solid currentColor;
 }
 
 .status-open { color: var(--app-status-open); }
@@ -266,6 +297,19 @@ ion-select.select-fill-outline.select-fill-outline {
 .priority-high { color: var(--app-priority-high); }
 .priority-medium { color: var(--app-priority-medium); }
 .priority-low { color: var(--app-priority-low); }
+
+/* Código de incidencia como resguardo de ticket (borde izquierdo perforado). */
+.ticket-code {
+  display: inline-block;
+  padding: 0.05rem 0.5rem 0.05rem 0.6rem;
+  border-left: 2px dashed var(--app-rule-strong);
+  font-family: var(--app-font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 
 /* Oculto visualmente pero disponible para lectores de pantalla. */
 .sr-only {
@@ -291,9 +335,9 @@ ion-select.select-fill-outline.select-fill-outline {
   left: 1rem;
   z-index: 10000;
   padding: 0.75rem 1rem;
-  border-radius: 0 0 10px 10px;
-  background: var(--ion-color-primary);
-  color: var(--ion-color-primary-contrast);
+  border-radius: 0 0 var(--app-radius) var(--app-radius);
+  background: var(--app-petrol);
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -301,7 +345,7 @@ ion-select.select-fill-outline.select-fill-outline {
   top: 0;
 }
 
-/* Indicador de foco visible y con buen contraste en todos los controles. */
+/* Foco visible en naranja de señalización. */
 :focus-visible {
   outline: 3px solid var(--app-focus-ring);
   outline-offset: 2px;

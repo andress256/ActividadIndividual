@@ -1,112 +1,119 @@
-// Tema de Incidencias360. Documentación de temas de Ionic:
+// Tema "parte de taller" de Incidencias360.
+// Inspirado en las órdenes de trabajo y la señalización industrial: azul petróleo,
+// naranja de señalización y fondo de hormigón. Documentación de temas de Ionic:
 // https://ionicframework.com/docs/theming/
 //
-// Todos los colores de texto tienen contraste AA (≥ 4.5:1) sobre su fondo.
+// Contraste comprobado: todo el texto ≥ 4.5:1; el naranja solo se usa en indicadores (≥ 3:1).
 
 :root {
-  --ion-font-family: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --app-font: 'Barlow', 'Segoe UI', system-ui, sans-serif;
+  --app-font-display: 'Barlow Condensed', 'Arial Narrow', 'Segoe UI', sans-serif;
+  --ion-font-family: var(--app-font);
 
-  // Color de marca (azul índigo).
-  --ion-color-primary: #2453d6;
-  --ion-color-primary-rgb: 36, 83, 214;
+  // Petróleo: barra lateral, botones y enlaces.
+  --ion-color-primary: #163e47;
+  --ion-color-primary-rgb: 22, 62, 71;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #2049bc;
-  --ion-color-primary-tint: #3a64da;
+  --ion-color-primary-shade: #13373e;
+  --ion-color-primary-tint: #2d5159;
 
-  --ion-color-success: #1b6e33;
-  --ion-color-success-rgb: 27, 110, 51;
+  --ion-color-success: #2e7d32;
+  --ion-color-success-rgb: 46, 125, 50;
   --ion-color-success-contrast: #ffffff;
   --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: #18612d;
-  --ion-color-success-tint: #327d47;
+  --ion-color-success-shade: #286e2c;
+  --ion-color-success-tint: #438a47;
 
-  --ion-color-danger: #b3261e;
-  --ion-color-danger-rgb: 179, 38, 30;
+  --ion-color-danger: #c62828;
+  --ion-color-danger-rgb: 198, 40, 40;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #9e211a;
-  --ion-color-danger-tint: #bb3c35;
+  --ion-color-danger-shade: #ae2323;
+  --ion-color-danger-tint: #cc3e3e;
 
-  // Superficies.
-  --ion-background-color: #f3f5fa;
-  --ion-background-color-rgb: 243, 245, 250;
-  --ion-text-color: #172033;
-  --ion-text-color-rgb: 23, 32, 51;
+  --ion-background-color: #e8eae6;
+  --ion-background-color-rgb: 232, 234, 230;
+  --ion-text-color: #1b2428;
+  --ion-text-color-rgb: 27, 36, 40;
   --ion-toolbar-background: #ffffff;
   --ion-item-background: transparent;
-  --ion-border-color: #dfe3ec;
+  --ion-border-color: #cfd4d0;
 
-  // Tokens propios de la aplicación.
-  --app-surface: #ffffff;
-  --app-surface-raised: #ffffff;
-  --app-shadow: 0 1px 2px rgba(23, 32, 51, 0.06), 0 4px 16px rgba(23, 32, 51, 0.06);
-  --app-radius: 14px;
-  --app-sidebar: #ffffff;
+  // Paleta de la aplicación.
+  --app-petrol: #163e47;
+  --app-signal: #f26b1d;        // naranja de señalización (solo indicadores)
+  --app-signal-text: #b4470a;   // naranja apto para texto
+  --app-sheet: #ffffff;         // "hoja" donde va el contenido
+  --app-rule: #cfd4d0;          // filetes y bordes
+  --app-rule-strong: #1b2428;
+  --app-muted-text: #4f5b60;
+  --app-hover: #f1f3ef;
+  --app-sidebar-text: #c9dade;
+  --app-radius: 4px;
 
-  --app-status-open: #b3261e;
-  --app-status-progress: #8a5300;
-  --app-status-closed: #1b6e33;
-  --app-priority-high: #b3261e;
-  --app-priority-medium: #8a5300;
-  --app-priority-low: #1d5fa8;
-  --app-focus-ring: #2453d6;
-  --app-muted-text: #556070;
-  --app-border: #dfe3ec;
-  --app-hover: #eef2fb;
-  --app-primary-soft: #e8eefc;
-  --app-brand-gradient: linear-gradient(135deg, #1f3fa8 0%, #2453d6 45%, #4f46e5 100%);
+  --app-status-open: #c62828;
+  --app-status-progress: #a15c00;
+  --app-status-closed: #2e7d32;
+  --app-priority-high: #c62828;
+  --app-priority-medium: #a15c00;
+  --app-priority-low: #1d5f75;
+  --app-focus-ring: #f26b1d;
+
+  // Compatibilidad con los nombres usados en los componentes.
+  --app-surface: var(--app-sheet);
+  --app-border: var(--app-rule);
 }
 
 @media (prefers-color-scheme: dark) {
   // `:root body` gana a la paleta oscura de Ionic, que define sus variables en `body`.
   :root body,
   :root {
-    --ion-color-primary: #7aa2ff;
-    --ion-color-primary-rgb: 122, 162, 255;
-    --ion-color-primary-contrast: #0b1020;
-    --ion-color-primary-contrast-rgb: 11, 16, 32;
-    --ion-color-primary-shade: #6b8fe0;
-    --ion-color-primary-tint: #87abff;
+    --ion-color-primary: #8ccfdb;
+    --ion-color-primary-rgb: 140, 207, 219;
+    --ion-color-primary-contrast: #0f1a1d;
+    --ion-color-primary-contrast-rgb: 15, 26, 29;
+    --ion-color-primary-shade: #7bb6c1;
+    --ion-color-primary-tint: #98d4df;
 
     --ion-color-success: #7ddc96;
     --ion-color-success-rgb: 125, 220, 150;
-    --ion-color-success-contrast: #0b1020;
-    --ion-color-success-contrast-rgb: 11, 16, 32;
+    --ion-color-success-contrast: #0f1a1d;
+    --ion-color-success-contrast-rgb: 15, 26, 29;
     --ion-color-success-shade: #6ec284;
     --ion-color-success-tint: #8ae0a1;
 
     --ion-color-danger: #ff8a80;
     --ion-color-danger-rgb: 255, 138, 128;
-    --ion-color-danger-contrast: #0b1020;
-    --ion-color-danger-contrast-rgb: 11, 16, 32;
+    --ion-color-danger-contrast: #0f1a1d;
+    --ion-color-danger-contrast-rgb: 15, 26, 29;
     --ion-color-danger-shade: #e07971;
     --ion-color-danger-tint: #ff968d;
 
-    --ion-background-color: #0e1320;
-    --ion-background-color-rgb: 14, 19, 32;
-    --ion-text-color: #e6e9f2;
-    --ion-text-color-rgb: 230, 233, 242;
-    --ion-toolbar-background: #141a29;
+    --ion-background-color: #0f1a1d;
+    --ion-background-color-rgb: 15, 26, 29;
+    --ion-text-color: #e4eaeb;
+    --ion-text-color-rgb: 228, 234, 235;
+    --ion-toolbar-background: #16252a;
     --ion-item-background: transparent;
-    --ion-border-color: #2a3247;
+    --ion-border-color: #2c3f45;
 
-    --app-surface: #161d2d;
-    --app-surface-raised: #1b2335;
-    --app-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.25);
-    --app-sidebar: #121827;
+    --app-petrol: #0b2a31;
+    --app-signal: #ff8f4d;
+    --app-signal-text: #ff8f4d;
+    --app-sheet: #16252a;
+    --app-rule: #2c3f45;
+    --app-rule-strong: #e4eaeb;
+    --app-muted-text: #a9b7bb;
+    --app-hover: #1d2f35;
+    --app-sidebar-text: #b7cbcf;
 
     --app-status-open: #ff8a80;
-    --app-status-progress: #ffcc66;
+    --app-status-progress: #ffc266;
     --app-status-closed: #7ddc96;
     --app-priority-high: #ff8a80;
-    --app-priority-medium: #ffcc66;
-    --app-priority-low: #8ab8ff;
-    --app-focus-ring: #8ab8ff;
-    --app-muted-text: #aab3c5;
-    --app-border: #2a3247;
-    --app-hover: #1f2840;
-    --app-primary-soft: #1e2a4a;
-    --app-brand-gradient: linear-gradient(135deg, #18265c 0%, #1f3fa8 55%, #3b37b8 100%);
+    --app-priority-medium: #ffc266;
+    --app-priority-low: #8ccfdb;
+    --app-focus-ring: #ff8f4d;
   }
 }

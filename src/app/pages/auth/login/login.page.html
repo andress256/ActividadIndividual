@@ -6,26 +6,32 @@
         <span class="brand-name">Incidencias360</span>
       </div>
 
-      <div class="pitch">
-        <p class="tagline">Todas las incidencias de tu empresa, bajo control.</p>
-        <p class="lead">Registra, sigue y analiza las incidencias internas desde cualquier dispositivo.</p>
-        <ul class="features">
-          @for (feature of features; track feature.text) {
-            <li>
-              <span class="feature-icon" aria-hidden="true"><ion-icon [name]="feature.icon" /></span>
-              {{ feature.text }}
-            </li>
-          }
-        </ul>
+      <p class="tagline">Registra una avería en un minuto y síguela hasta cerrarla.</p>
+
+      <!-- Parte de incidencia de ejemplo (datos ficticios), puramente ilustrativo. -->
+      <div class="work-order" aria-hidden="true">
+        <div class="wo-stub">
+          <span class="wo-label">Parte</span>
+          <span class="wo-code">INC-027</span>
+        </div>
+        <div class="wo-body">
+          <p class="wo-title">Proyector de formación roto</p>
+          <dl class="wo-fields">
+            <div><dt>Departamento</dt><dd>Mantenimiento</dd></div>
+            <div><dt>Prioridad</dt><dd>Alta</dd></div>
+            <div><dt>Registrada</dt><dd>01/10/2026</dd></div>
+          </dl>
+          <span class="badge status-in-progress wo-status">En curso</span>
+        </div>
       </div>
 
-      <p class="brand-footer">Desarrollo de Interfaces · 2.º DAM</p>
+      <p class="brand-footer">Proyecto de Desarrollo de Interfaces, 2.º DAM</p>
     </section>
 
     <main class="form-panel" tabindex="-1">
       <div class="form-card">
         <h1>Iniciar sesión</h1>
-        <p class="subtitle">Introduce tus credenciales para acceder.</p>
+        <p class="subtitle">Entra con tu usuario de la empresa.</p>
 
         <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
           <div class="field">
@@ -83,13 +89,12 @@
               <ion-spinner name="crescent" aria-hidden="true" />
               <span>Comprobando…</span>
             } @else {
-              <ion-icon slot="start" name="log-in-outline" aria-hidden="true" />
               <span>Entrar</span>
             }
           </ion-button>
         </form>
 
-        <p class="help">¿Primera vez? Consulta el <a routerLink="/ayuda">manual de usuario</a>.</p>
+        <p class="help">¿Es tu primera vez? Consulta el <a routerLink="/ayuda">manual de uso</a>.</p>
       </div>
     </main>
   </div>
